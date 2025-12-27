@@ -24,12 +24,10 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: |
-          npm run build
-          npm run export   # export static files to out/
+        run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v6
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
