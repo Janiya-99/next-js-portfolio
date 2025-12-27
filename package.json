@@ -1,12 +1,14 @@
 {
-  "name": "temp_app",
+  "name": "next-js-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -32,10 +34,12 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "gh-pages": "^5.0.0"
   },
-    "engines": {
-    "node": ">=20.9.0"
-  }
+  "engines": {
+    "node": ">=20.9.0",
+    "npm": ">=10.0.0"
+  },
+  "homepage": "https://janiya-99.github.io/next-js-portfolio"
 }
-
