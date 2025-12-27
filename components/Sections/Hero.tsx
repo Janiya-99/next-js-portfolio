@@ -52,7 +52,7 @@ export function Hero() {
         transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         className="relative z-10 mt-12 md:mt-0 md:w-1/2 flex justify-center md:justify-end"
       >
-        <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
+        <div className="relative w-[250px] h-[250px] md:w-[400px] md:h-[400px]">
           {/* Circular Glow/Background */}
           <div className="absolute inset-0 rounded-full border border-white/20 scale-110" />
           <div className="absolute inset-0 rounded-full border border-white/10 scale-125" />

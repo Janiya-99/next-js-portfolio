@@ -35,9 +35,9 @@ export function Projects() {
   });
 
   return (
-    <section ref={container} id="projects" className="relative h-[300vh] mt-20 backdrop-blur-sm">
+    <section ref={container} id="projects" className="relative h-[300vh] mt-20 backdrop-blur-sm z-10">
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
-        <motion.div style={{ x: useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]) }} className="flex gap-10 pl-10 md:pl-20">
+        <motion.div style={{ x: useTransform(scrollYProgress, [0, 1], ["0%", "-55%"]) }} className="flex gap-10 pl-10 md:pl-20">
           <div className="flex flex-col justify-center min-w-[50vw] md:min-w-[30vw]">
              <h2 className="text-6xl md:text-8xl font-syne font-bold text-white leading-none">
                 Selected <br /> <span className="text-gray-500">Works</span>
