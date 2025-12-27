@@ -55,17 +55,17 @@ export function Experience() {
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            transition={{ type: "spring", stiffness: 50, damping: 20, delay: index * 0.15 }}
             className="relative"
           >
-             <span className="absolute -left-[41px] top-6 w-5 h-5 bg-black border-2 border-orange-500 rounded-full" />
+             <span className="absolute -left-[41px] top-6 w-5 h-5 bg-black border-2 border-white/60 rounded-full" />
             
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
               <div>
-                <h3 className="text-2xl font-bold text-white hover:text-orange-500 transition-colors">
+                <h3 className="text-2xl font-bold text-white hover:text-gray-300 transition-colors">
                   {exp.role}
                 </h3>
                 <p className="text-lg text-gray-400">{exp.company}</p>
