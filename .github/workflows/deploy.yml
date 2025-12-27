@@ -4,6 +4,8 @@ on:
   pull_request:
     branches: ["main"]
 
+name: Debug Node Version Build
+
 jobs:
   build:
     runs-on: ubuntu-latest
