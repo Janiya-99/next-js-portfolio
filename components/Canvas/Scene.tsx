@@ -1,12 +1,49 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
+import { Canvas, useFrame, extend } from "@react-three/fiber";
+import { Points, PointMaterial, shaderMaterial } from "@react-three/drei";
 import { useState, useRef, Suspense, useMemo, useEffect } from "react";
 // @ts-ignore
 import * as random from "maath/random/dist/maath-random.esm";
 import { useScroll } from "framer-motion";
 import * as THREE from "three";
+
+// --- Custom Shader for Waving Tentacles ---
+const TentacleMaterial = shaderMaterial(
+  { uTime: 0, uColor: new THREE.Color('#f5effcff') },
+  // Vertex Shader
+  `
+    uniform float uTime;
+    void main() {
+      vec3 pos = position;
+      
+      // Wind/Wave Effect: Stronger displacement further down (negative Y)
+      float drop = -pos.y; // 0 at top, increasing downwards
+      
+      // Multi-frequency wave for organic "underwater wind" feel
+      float waveX = sin(uTime * 2.5 + drop * 1.5) * 0.08 * drop; 
+      float waveZ = cos(uTime * 2.0 + drop * 2.0) * 0.08 * drop;
+      
+      pos.x += waveX;
+      pos.z += waveZ;
+
+      vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+      gl_PointSize = 30.0 * (1.0 / -mvPosition.z); // Size attenuation
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  `,
+  // Fragment Shader
+  `
+    uniform vec3 uColor;
+    void main() {
+      // Circular particle shape
+      if (length(gl_PointCoord - vec2(0.1, 0.5)) > 0.475) discard;
+      gl_FragColor = vec4(uColor, 0.1); // 0.5 Opacity
+    }
+  `
+);
+
+extend({ TentacleMaterial });
 
 function FallingGlobe(props: any) {
   const ref = useRef<any>(null);
@@ -70,7 +107,7 @@ function FloatingParticles() {
         <PointMaterial
           transparent
           color="#ffffff"
-          size={0.015} // Slightly varying size illusion via distance
+          size={0.019} // Slightly varying size illusion via distance
           sizeAttenuation={true}
           depthWrite={false}
           opacity={0.3}
@@ -101,7 +138,7 @@ function LargeFloatingParticles() {
         <PointMaterial
           transparent
           color="#ffffff"
-          size={0.04} // Distinctly larger
+          size={0.004} // Distinctly larger
           sizeAttenuation={true}
           depthWrite={false}
           opacity={0.7} // More visible
@@ -206,7 +243,7 @@ function Jellyfish() {
   const tentacleParticles = useMemo(() => {
     const count = 3000; // Slightly reduced count to de-clutter
     const positions = new Float32Array(count * 3);
-    const numTentacles = 30; // Fewer independent strands
+    const numTentacles = 50; // Fewer independent strands
     const ptsPerStrand = count / numTentacles;
 
     for (let t = 0; t < numTentacles; t++) {
@@ -285,7 +322,13 @@ function Jellyfish() {
           tentaclesRef.current.scale.y = 1 + drag; 
           tentaclesRef.current.scale.x = 1 - drag * 0.2;
           tentaclesRef.current.scale.z = 1 - drag * 0.2;
-          tentaclesRef.current.rotation.y = Math.sin(time * 0.5) * 0.1;
+          
+          // Update Shader Uniforms for Wave Animation
+          // @ts-ignore
+          if (tentaclesRef.current.material.uniforms) {
+               // @ts-ignore
+               tentaclesRef.current.material.uniforms.uTime.value = time;
+          }
       }
       
       // Vortex Animation (Rotate + Pulse)
@@ -355,7 +398,8 @@ function Jellyfish() {
 
         {/* 4. Tentacles - Purple/Red Hint (#9b5de5) */}
         <Points ref={tentaclesRef} positions={tentacleParticles} stride={3} frustumCulled={false}>
-             <PointMaterial transparent color="#9b5de5" size={0.015} sizeAttenuation={true} depthWrite={false} opacity={0.5} />
+             {/* @ts-ignore */}
+             <tentacleMaterial transparent depthWrite={false} blending={THREE.AdditiveBlending} />
         </Points>
         
         {/* 5. Vortex - Faint Ripple (#ffffff) */}

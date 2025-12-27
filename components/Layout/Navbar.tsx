@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -25,6 +25,37 @@ export function Navbar() {
     }
   });
 
+  // Scroll Spy Logic
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleScroll = () => {
+      const sections = navItems.map(item => {
+        if (item.href === "/") return document.body; // Approximate Home/Top
+        const id = item.href.replace("#", "");
+        return document.getElementById(id);
+      });
+
+      const scrollPosition = window.scrollY + 200; // Offset for better detection
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section) {
+            const offsetTop = section === document.body ? 0 : section.offsetTop;
+            if (scrollPosition >= offsetTop) {
+                setActive(navItems[i].name);
+                break;
+            }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []); // Explicitly empty dependency array for mount only
+
   return (
     <motion.div
       variants={{
@@ -41,7 +72,7 @@ export function Navbar() {
             key={item.name}
             onClick={() => {
               setActive(item.name);
-              const element = document.querySelector(item.href);
+              const element = item.href === "/" ? document.body : document.querySelector(item.href);
               if (element) {
                 element.scrollIntoView({ behavior: "smooth" });
               }

@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${syne.variable}`}>
-      <body className="antialiased bg-main text-[#ffffff]">
+      <body className="antialiased bg-main text-[#ffffff]" suppressHydrationWarning>
         <Preloader />
         <ScrollToTop />
         <SmoothScroll>
