@@ -1,0 +1,249 @@
+JANITH SAMARASINGHE
+SOFTWARE ENGINEER
+317/54/1, Samadhi Mv, Mahakanda, Kandy | +9470 1267400 | janithsamaharasinghe1999@gmail.com |
+https://www.linkedin.com/in/janit h-chathuranga-647564202
+
+Dedicated Software Developer with a background in developing custom applications. Skilled in
+system integration, application performance optimization, and database development. Experienced
+in using SOLID principles, OOP concepts, and better practice in working under a well-managed folder
+structure.
+Proficient in PHP and Database Management. Strong problem-solving and collaboration abilities.
+
+EDUCATION
+•
+•
+
+Bachelor of Science in (Physics and ICT)
+University of Jayewardenepura (2020 – 2023)
+GCE Advanced Level
+Dharmaraja College Kandy
+
+•
+
+o
+
+ICT - B
+
+o
+
+Combined Math - C
+
+o
+
+Physics – S
+
+GCE Ordinary Level
+Wariyapola Sri Sumangala College Kandy
+
+WORK EXPERIENCE
+Software Engineer (Freelance)
+Pixandco (Pvt) Ltd
+Associate Software Engineer
+Vital One (Pvt) Ltd (December 2024 – August 2025)
+Trainee Software Engineer
+Vital One (Pvt) Ltd (September 2023 – December 2024)
+●
+
+Assisted in the development and maintenance of web applications using Laravel.
+
+●
+
+Collaborated with the team to design and implement databases in MySQL and PostgreSQL.
+
+●
+
+Gained hands-on experience with Docker for containerization and deployment of applications.
+
+●
+
+Participated in code reviews, debugging, and testing to ensure high-quality software delivery.
+
+●
+
+Worked closely with senior engineers to enhance my understanding of software development
+best practices
+
+PROJECTS
+Bicycle-Rent App
+In this project developed a Bicycle Rent App Backend. Laravel framework serves as the foundation
+for a bicycle rental application. It provides the necessary backend functionality, including APIs and
+database management, to support features like user authentication, bicycle listing according to
+stations, GPS tracking and emergencies.
+●
+●
+
+Implemented APIs and a database using Laravel framework.
+APIs handling.
+
+●
+●
+
+User Authentication, Authorization.
+Push Notification Using Firebase
+
+●
+
+Database store user data, bicycle details, employ data, weather data, stations etc.
+
+Medical Information System (JAVA)
+Developed a system that facilitates appointment scheduling can be very useful in various
+industries such as healthcare
+●
+
+Use Figma to design sketch design of ux.
+
+●
+
+GUI create by java Swing
+
+Japura ICT Mobile Application
+•
+
+Use Figma to design sketch design of UX
+
+•
+
+Use java for develop application
+
+ML Sales Dashboard
+Developed a Sales Dashboard, ML for casting for Kelani tire annual sales
+●
+
+Python
+
+●
+
+Dash
+
+Data Categorization & Classification for USA Crime Data Using Power BI & Python
+Arduino Based CNC Pen Plotter Machine
+
+OTHER QUALIFICATIONS
+•
+
+Certificate in Computer Science
+
+•
+
+Advanced Certificate in English Language
+o
+
+IBA Campus
+
+SKILLS, TOOLS AND TECHNOLOGIES
+Languages
+
+Tools and Technologies
+
+Frameworks
+
+•
+
+React
+
+•
+
+Power BI
+
+•
+
+Laravel
+
+•
+
+Java
+
+•
+
+Figma
+
+•
+
+Next js
+
+•
+
+C
+
+•
+
+PHPMyAdmin
+
+•
+
+Python
+
+•
+
+Android Studio
+
+•
+
+PHP
+
+•
+
+Adobe Photoshop
+
+•
+
+HTML
+
+•
+
+Postman
+
+•
+
+Java Script
+
+•
+
+XAMPP
+
+•
+
+PostgreSQL.
+
+•
+
+Arduino
+
+•
+
+mySQL
+
+•
+
+GitHub
+
+•
+
+Vue js
+
+•
+
+Docker
+
+REFERENCES
+A.H.V.M. Silva,
+
+G A R T N B Gurulumulla
+
+Managing Director,
+
+Senior Executive - IT
+
+Euidor (Pvt) Ltd,
+
+ACME Printing & Packaging PLC
+
+Colombo.
+
+0768922600
+
+071 879 4256.
+
+ravishka.19@icloud.com
+
+
