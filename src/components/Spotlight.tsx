@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef, type ReactNode } from "react";
 
 // Pointer-local spotlight treatment inspired by React Bits' SpotlightCard.

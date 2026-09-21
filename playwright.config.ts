@@ -9,7 +9,7 @@ export default defineConfig({
     baseURL: "http://localhost:4173",
     browserName: "chromium",
     launchOptions: {
-      executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome",
+      executablePath: process.env.CHROME_PATH || (process.env.CI ? undefined : "/usr/bin/google-chrome"),
       args: ["--no-sandbox", "--enable-unsafe-swiftshader"],
     },
     screenshot: "only-on-failure",

@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
-import { render, routeMetadata, projects } from "../.ssr/entry-server.js";
+import { render, routeMetadata, projects, site as siteConfig } from "../.ssr/entry-server.js";
 
 const root = resolve("dist");
 const template = await readFile(resolve(root, "index.html"), "utf8");
@@ -11,7 +11,7 @@ const routes = [
   "/contact",
   ...projects.map((project) => `/work/${project.slug}`),
 ];
-const site = process.env.VITE_SITE_URL?.replace(/\/$/, "");
+const site = siteConfig.url;
 const escape = (value) =>
   value
     .replaceAll("&", "&amp;")
