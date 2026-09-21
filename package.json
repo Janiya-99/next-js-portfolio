@@ -1,0 +1,53 @@
+{
+  "name": "janith-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx --outDir .ssr && node scripts/prerender.mjs",
+    "start": "node scripts/serve.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test:browser": "playwright test",
+    "preview": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "latest",
+    "@fontsource-variable/manrope": "latest",
+    "@fontsource/ibm-plex-mono": "latest",
+    "@gsap/react": "latest",
+    "@react-three/fiber": "latest",
+    "gsap": "latest",
+    "lenis": "latest",
+    "lucide-react": "latest",
+    "react": "~19.2.0",
+    "react-dom": "~19.2.0",
+    "react-icons": "^5.7.0",
+    "react-router-dom": "latest",
+    "three": "latest"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "latest",
+    "@eslint/js": "^9.0.0",
+    "@playwright/test": "latest",
+    "@tailwindcss/vite": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/three": "latest",
+    "@vitejs/plugin-react": "latest",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-react-refresh": "latest",
+    "globals": "latest",
+    "prettier": "^3.9.8",
+    "tailwindcss": "latest",
+    "typescript": "latest",
+    "typescript-eslint": "latest",
+    "vite": "latest"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "type": "module"
+}
