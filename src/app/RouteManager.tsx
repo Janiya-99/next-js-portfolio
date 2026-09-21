@@ -56,14 +56,22 @@ export function RouteManager() {
     const pathChanged = previous.current.pathname !== location.pathname;
     const frame = requestAnimationFrame(() => {
       window.dispatchEvent(new Event("portfolio:navigation"));
-      if (location.hash)
-        document
-          .getElementById(decodeURIComponent(location.hash.slice(1)))
-          ?.scrollIntoView();
-      else if (navigation === "POP")
+      if (location.hash) {
+        const target = document.getElementById(
+          decodeURIComponent(location.hash.slice(1)),
+        );
+        const animated = window.matchMedia(
+          "(prefers-reduced-motion: no-preference) and (pointer: fine)",
+        ).matches;
+        target?.scrollIntoView({ behavior: animated ? "smooth" : "instant" });
+        if (target) {
+          target.tabIndex = -1;
+          target.focus({ preventScroll: true });
+        }
+      } else if (navigation === "POP")
         window.scrollTo(0, positions.get(location.key) || 0);
       else if (pathChanged) window.scrollTo(0, 0);
-      if (pathChanged)
+      if (pathChanged && !location.hash)
         document
           .querySelector<HTMLElement>("h1")
           ?.focus({ preventScroll: true });

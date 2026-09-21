@@ -45,7 +45,7 @@ Browser tests cover all eight routes, static HTML, hydration, metadata, filters 
 
 ## Motion and accessibility
 
-Lenis uses the GSAP ticker as its only animation clock. Native keyboard scrolling interrupts any in-progress smooth animation. Touch and reduced-motion users use native scrolling. Scoped GSAP contexts clean up on route changes; the small 3D ornament is fetched only near its section on capable desktop devices, stops rendering offscreen, and has a static fallback. Page copy never depends on WebGL or animations to render.
+Lenis uses the GSAP ticker as its only animation clock. Native keyboard scrolling interrupts any in-progress smooth animation. Touch and reduced-motion users use native scrolling. GSAP adds scroll-linked hero/About photo parallax, staggered technology cards, project illustration movement, timeline accents, and a page-progress indicator. Scoped contexts clean up on route changes; the small 3D ornament is fetched only near its section on capable desktop devices, stops rendering offscreen, and has a static fallback. Page copy never depends on WebGL or animations to render.
 
 Mobile navigation uses a native modal dialog with Escape handling, focus containment, and scroll restoration. Filters use buttons with pressed states, preserve query state in browser history, and hydrate safely on shared filtered URLs. Email links open the user's mail app; the copy action reports clipboard success or a useful fallback.
 

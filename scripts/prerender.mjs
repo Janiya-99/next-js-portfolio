@@ -1,6 +1,11 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
-import { render, routeMetadata, projects, site as siteConfig } from "../.ssr/entry-server.js";
+import {
+  render,
+  routeMetadata,
+  projects,
+  site as siteConfig,
+} from "../.ssr/entry-server.js";
 
 const root = resolve("dist");
 const template = await readFile(resolve(root, "index.html"), "utf8");

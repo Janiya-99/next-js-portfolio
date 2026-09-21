@@ -173,3 +173,56 @@ test("core pages pass automated WCAG accessibility checks", async ({
     ).toEqual([]);
   }
 });
+
+test("photo parallax follows scroll and is removed for reduced motion", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+  const photo = page.locator(".hero-backdrop");
+  await expect(photo).toHaveCSS("transform", /matrix/);
+  const before = await photo.evaluate(
+    (element) => getComputedStyle(element).transform,
+  );
+  await page.evaluate(() => window.scrollTo(0, 450));
+  await expect
+    .poll(() =>
+      photo.evaluate((element) => getComputedStyle(element).transform),
+    )
+    .not.toBe(before);
+  await expect(page.locator("[data-scroll-progress]")).toHaveCSS(
+    "transform",
+    /matrix/,
+  );
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(photo).toHaveCSS("transform", "none");
+  await expect(page.locator("[data-scroll-progress]")).not.toBeVisible();
+});
+
+test("cross-page anchors retain destination, active navigation, and hydration", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/work/");
+  await page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "Experience" })
+    .click();
+  await expect(page).toHaveURL(/#experience$/);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document.querySelector("#experience")!.getBoundingClientRect().top,
+      ),
+    )
+    .toBeLessThan(200);
+  await expect(
+    page.getByRole("link", { name: "Experience", exact: true }).first(),
+  ).toHaveAttribute("aria-current", "page");
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.reload();
+  await expect(page.locator("#experience")).toBeFocused();
+  expect(errors).toEqual([]);
+});

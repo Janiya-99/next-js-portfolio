@@ -13,6 +13,11 @@ import { RouteManager } from "./RouteManager";
 export function App() {
   return (
     <>
+      <div
+        className="page-scroll-progress"
+        data-scroll-progress
+        aria-hidden="true"
+      />
       <Navbar />
       <main id="main" tabIndex={-1}>
         <Routes>

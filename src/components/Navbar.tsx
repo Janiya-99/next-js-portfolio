@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 const links = [
@@ -10,9 +10,18 @@ const links = [
   { href: "/#experience", label: "Experience" },
   { href: "/contact", label: "Contact" },
 ];
+const subscribe = () => () => {};
+const serverHash = () => "";
 
 export function Navbar() {
-  const { pathname } = useLocation();
+  const { pathname, hash: routeHash } = useLocation();
+  const hash = useSyncExternalStore(subscribe, () => routeHash, serverHash);
+  const isActive = (href: string) =>
+    href === "/"
+      ? pathname === "/" && !hash
+      : href.includes("#")
+        ? pathname + hash === href
+        : pathname.startsWith(href);
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
 
@@ -59,15 +68,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 to={link.href}
-                aria-current={
-                  (
-                    link.href === "/"
-                      ? pathname === "/"
-                      : pathname.startsWith(link.href)
-                  )
-                    ? "page"
-                    : undefined
-                }
+                aria-current={isActive(link.href) ? "page" : undefined}
               >
                 {link.label}
                 <span className="nav-dot" />
@@ -120,9 +121,7 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 onClick={closeMenu}
-                aria-current={
-                  pathname.startsWith(link.href) ? "page" : undefined
-                }
+                aria-current={isActive(link.href) ? "page" : undefined}
               >
                 <span className="mono">0{index + 1}</span>
                 {link.label}

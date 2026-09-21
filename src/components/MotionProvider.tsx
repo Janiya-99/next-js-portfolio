@@ -59,6 +59,9 @@ export function MotionProvider() {
           window.removeEventListener("portfolio:navigation", interrupt);
           gsap.ticker.remove(tick);
           lenis.off("scroll", update);
+          // Reset first so an already scheduled native-scroll velocity callback
+          // cannot re-add Lenis classes after the instance is destroyed.
+          lenis.stop();
           lenis.destroy();
         };
       },
@@ -70,6 +73,15 @@ export function MotionProvider() {
     () => {
       const media = gsap.matchMedia();
       media.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.fromTo(
+          "[data-scroll-progress]",
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: "none",
+            scrollTrigger: { start: 0, end: "max", scrub: 0.2 },
+          },
+        );
         gsap.from("[data-hero-line]", {
           y: 28,
           opacity: 0,
@@ -100,6 +112,76 @@ export function MotionProvider() {
       media.add(
         "(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
         () => {
+          const heroPhoto =
+            document.querySelector<HTMLElement>(".hero-backdrop");
+          if (heroPhoto) {
+            gsap.fromTo(
+              heroPhoto,
+              { yPercent: -3, scale: 1.12 },
+              {
+                yPercent: 6,
+                scale: 1.12,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: ".cinematic-hero",
+                  start: "top top",
+                  end: "bottom top",
+                  scrub: 0.6,
+                },
+              },
+            );
+          }
+          gsap.utils
+            .toArray<HTMLElement>(".home-about-photo img, .portrait img")
+            .forEach((photo) => {
+              gsap.fromTo(
+                photo,
+                { yPercent: -5, scale: 1.14 },
+                {
+                  yPercent: 5,
+                  scale: 1.14,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: photo.parentElement,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0.7,
+                  },
+                },
+              );
+            });
+          const technologyCards = gsap.utils.toArray<HTMLElement>(".tech-card");
+          if (technologyCards.length) {
+            gsap.from(technologyCards, {
+              y: 22,
+              opacity: 0,
+              duration: 0.6,
+              stagger: 0.045,
+              ease: "power3.out",
+              clearProps: "all",
+              scrollTrigger: {
+                trigger: ".tech-cards",
+                start: "top 92%",
+                once: true,
+              },
+            });
+          }
+          gsap.utils.toArray<HTMLElement>(".timeline li").forEach((entry) => {
+            gsap.fromTo(
+              entry,
+              { "--entry-progress": 0 },
+              {
+                "--entry-progress": 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: entry,
+                  start: "top 85%",
+                  end: "bottom 55%",
+                  scrub: 0.4,
+                },
+              },
+            );
+          });
           gsap.utils
             .toArray<HTMLElement>("[data-parallax]")
             .forEach((element) => {
