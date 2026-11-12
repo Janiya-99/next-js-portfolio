@@ -121,19 +121,19 @@ export function ExperiencePage() {
       <CinematicPageHero
         bgImage={`${import.meta.env.BASE_URL}images/janith-working.webp`}
         bgPosition="center 30%"
-        badge="CAREER &amp; CAPABILITIES"
-        metaBadge="VERIFIED TRACK RECORD"
+        badge="CAREER &amp; BACKGROUND"
+        metaBadge="3+ YEARS IN PRODUCTION"
         title={
           <span data-hero-line>
-            Production Experience <span className="accent-text">&amp; Demonstrated Outcomes</span>
+            Engineering Experience <span className="accent-text">&amp; Technical Background</span>
           </span>
         }
-        subtitle="Over 3+ years engineering enterprise SaaS platforms, high-concurrency Go and Laravel backends, multi-tenant schemas, and automated zero-downtime container deployments."
+        subtitle="Over 3 years of building software that teams and customers rely on daily — combining fast backends, clean user interfaces, and dependable cloud deployments."
         chips={[
-          "3+ Years Production",
-          "35% Query Latency Speedup",
-          "40% Deployment Reduction",
-          "99.9% Uptime SLA",
+          "Full-Stack Development",
+          "Go, Laravel & React",
+          "Docker & CI/CD Pipelines",
+          "Database Optimization",
         ]}
       />
 
@@ -141,11 +141,12 @@ export function ExperiencePage() {
       <section className="section container experience-timeline-section" id="experience">
         <SectionHeading
           index="01"
-          label="PRODUCTION CAREER TIMELINE"
-          title="Professional track record &amp; enterprise roles."
+          label="CAREER TIMELINE"
+          title="Professional roles &amp; engineering journey."
         >
           <p>
-            Full-time engineering roles at Asipiya International and Vital One, paired with concurrent enterprise ERP architecture engagements across Sri Lanka and international clients.
+            Full-time engineering roles at Asipiya International and Vital One, alongside
+            enterprise architecture projects for businesses across Sri Lanka and abroad.
           </p>
         </SectionHeading>
 

@@ -49,10 +49,10 @@ export const projects: Project[] = [
     number: "01",
     title: "Multi-Tenant Enterprise HRMS & SaaS Platform",
     shortTitle: "Enterprise HRMS & SaaS",
-    heading: "Unified workforce telemetry, Go concurrency & automated statutory compliance.",
+    heading: "Automated payroll, workforce management & custom document design.",
     category: "ERP & Enterprise",
     summary:
-      "Enterprise multi-tenant workforce management platform featuring real-time biometric telemetry, Go worker pools, LKAS 19 actuarial gratuity calculations, multi-bracket payroll engines, and a Canva-grade visual document designer.",
+      "A complete multi-tenant workforce platform built to simplify complex payroll, statutory tax compliance, biometric attendance tracking, and drag-and-drop document generation for multiple companies.",
     technologies: [
       "React 19",
       "Go (Golang 1.23)",
@@ -154,10 +154,10 @@ export const projects: Project[] = [
     number: "02",
     title: "Pharmaceutical Distribution ERP & POS System",
     shortTitle: "PharmaCore Distribution ERP",
-    heading: "Connecting 10,000+ SKUs, FEFO batch expiry, and general ledger finance.",
+    heading: "Batch inventory tracking, point of sale & general ledger accounting.",
     category: "ERP & Enterprise",
     summary:
-      "Full-scale pharmaceutical distribution ERP and POS system engineered in Go and React/TypeScript. Unifies warehouse logistics, FEFO inventory tracking, invoicing copilot, compliance recalls, and automated double-entry accounting across 3 major distribution centers.",
+      "A distribution and POS platform built with Go and React/TypeScript to handle pharmaceutical warehouse logistics, FIFO lot allocation, fast invoicing, and double-entry accounting across 3 major branches.",
     technologies: [
       "Go (Gin)",
       "React 19",
@@ -452,10 +452,10 @@ export const projects: Project[] = [
     number: "05",
     title: "AI Travel Product Management System",
     shortTitle: "TravelOps AI Platform",
-    heading: "Structured Gemini AI draft generation, natural language catalog search & Laravel 11.",
+    heading: "AI itinerary creation, smart catalog search & modern booking workflows.",
     category: "SaaS & Finance",
     summary:
-      "Full-stack travel product management platform featuring structured Gemini AI draft generation, conversational natural language catalog search, and automated expiration filtering. Engineered with Laravel 11, Service-Repository pattern, React 18, and Docker compose.",
+      "A travel operations platform that uses the Gemini API to turn ideas into structured tour itineraries, complete with conversational catalog search, inventory tracking, and clean booking administration.",
     technologies: [
       "Laravel 11",
       "React 18",
@@ -529,10 +529,10 @@ export const projects: Project[] = [
     number: "06",
     title: "Binaare Virtual Art Gallery & E-Commerce Platform",
     shortTitle: "Binaare Virtual Art Gallery",
-    heading: "Immersive virtual exhibition rooms, automated WebP image pipelines, and bespoke CMS.",
+    heading: "Virtual viewing rooms, high-res canvas delivery & smooth e-commerce.",
     category: "Web Applications",
     summary:
-      "High-end fine art exhibition and e-commerce platform built for Binaare Art Gallery. Combines interactive virtual viewing rooms, an automated media pipeline for high-resolution canvas artwork, custom curator CMS, and Stripe payment processing.",
+      "A digital fine art gallery and online store combining immersive virtual viewing spaces, high-resolution artwork delivery, an easy-to-use curator CMS, and seamless Stripe payments.",
     technologies: [
       "React 19",
       "TypeScript",

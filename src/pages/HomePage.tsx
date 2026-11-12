@@ -46,23 +46,23 @@ import { Spotlight } from "@/components/Spotlight";
 const capabilities = [
   {
     icon: Braces,
-    title: "High-Concurrency Backend & APIs",
-    copy: "Worker pools, microservices, and secure RESTful APIs processing over 5,000 daily transactions.",
+    title: "Fast, Resilient APIs",
+    copy: "Designing clean REST APIs and Go worker pools that handle thousands of daily requests smoothly and without hiccups.",
   },
   {
     icon: Workflow,
-    title: "Multi-Tenant SaaS & ERP Systems",
-    copy: "Connecting workforce telemetry, FEFO batch tracking, and double-entry general ledger accounting.",
+    title: "Multi-Tenant Business Platforms",
+    copy: "Building complex SaaS products and ERPs that keep client data strictly separated while making day-to-day operations simple.",
   },
   {
     icon: PanelsTopLeft,
-    title: "Relational Schema & Query Optimization",
-    copy: "Carefully indexed relational structures improving endpoint response times by 35%.",
+    title: "Database Design & Query Tuning",
+    copy: "Structuring relational databases with thoughtful indexing so queries stay fast and snappy as your data grows.",
   },
   {
     icon: Cloud,
-    title: "Containerization & Cloud Infrastructure",
-    copy: "Automated container stacks, reverse proxying, and cloud deployments maintaining 99.9% uptime.",
+    title: "Containerized & Hands-Off Deploys",
+    copy: "Packaging apps in Docker with automated CI/CD pipelines, reverse proxies, and health checks so shipping updates is stress-free.",
   },
 ];
 
@@ -112,35 +112,35 @@ export function HomePage() {
           <div className="cinematic-copy">
             <p className="eyebrow gold-rule hero-status-eyebrow" data-hero-copy>
               <span className="hero-status-dot" aria-hidden="true" />
-              FULL-STACK SOFTWARE ENGINEER · DEVOPS &amp; SYSTEMS ARCHITECTURE
+              FULL-STACK SOFTWARE ENGINEER · KANDY, SRI LANKA
             </p>
             <h1
               tabIndex={-1}
               className="hero-modern-title"
-              aria-label="Architecting full-stack scale & cloud resilience."
+              aria-label="Building reliable apps, clean architectures & systems that scale."
             >
               <span className="hero-line-mask">
                 <span className="hero-line-inner" data-hero-line>
-                  Architecting
+                  Building reliable apps,
                 </span>
               </span>
               <span className="hero-line-mask">
                 <span className="hero-line-inner" data-hero-line>
-                  full-stack scale &amp;
+                  clean architectures &amp;
                 </span>
               </span>
               <span className="hero-line-mask">
                 <span className="hero-line-inner hero-accent-gradient" data-hero-line>
-                  cloud resilience.
+                  systems that scale.
                 </span>
               </span>
             </h1>
             <p className="cinematic-description" data-hero-copy>
-              I engineer end-to-end applications: responsive modern interfaces in{" "}
-              <span className="hero-inline-kw">React 19 &amp; Next.js</span>, high-concurrency{" "}
-              <span className="hero-inline-kw">Go &amp; Laravel</span> backends, and automated{" "}
-              <span className="hero-inline-kw">DevOps container pipelines</span> built to
-              scale under production load. Based in Kandy, Sri Lanka.
+              I&apos;m Janith — a full-stack engineer and systems enthusiast based in Kandy, Sri Lanka.
+              I enjoy building products from the ground up: pairing clean, responsive interfaces in{" "}
+              <span className="hero-inline-kw">React 19 &amp; Next.js</span> with robust{" "}
+              <span className="hero-inline-kw">Go &amp; Laravel</span> backends, containerized with{" "}
+              <span className="hero-inline-kw">Docker</span> for smooth, dependable operations.
             </p>
             <div className="cinematic-actions" data-hero-copy>
               <ButtonLink href="/work">View Selected Work</ButtonLink>
@@ -175,10 +175,10 @@ export function HomePage() {
 
           <div className="hero-right-symmetrical">
             <div className="hero-handwriting" aria-hidden="true">
-              <span className="hw-line">Architect</span>
+              <span className="hw-line">Design</span>
+              <span className="hw-line">Build</span>
+              <span className="hw-line">Ship</span>
               <span className="hw-line">Scale</span>
-              <span className="hw-line">Optimize</span>
-              <span className="hw-line">Deploy</span>
               <i className="hw-underline" />
             </div>
             <div className="hero-experience glass">
@@ -240,25 +240,25 @@ export function HomePage() {
 
           <div className="home-about-content">
             <p className="eyebrow gold-rule">
-              CRAFTSMANSHIP · FULL-STACK &amp; DEVOPS ARCHITECTURE
+              ABOUT JANITH · PASSION FOR CRAFTSMANSHIP
             </p>
             <h2>
-              Resilient code.
+              Clean code on screen.
               <br />
-              <span className="accent-text">End-to-end impact.</span>
+              <span className="accent-text">Solid systems under the hood.</span>
             </h2>
             <p className="home-about-lead">
-              Hi, I&apos;m Janith — a full stack software engineer and systems architect from Kandy, Sri
-              Lanka with deep DevOps experience. I build end-to-end applications: from responsive,
-              accessible frontends in React 19 and Next.js to high-throughput Go and Laravel microservices,
-              strictly isolated relational schemas, and automated CI/CD container workflows.
+              Hi, I&apos;m Janith — a full-stack engineer who loves the whole journey of building
+              software. Whether I&apos;m polishing a responsive interface in React and Next.js or
+              tuning database queries in Go and Laravel, I care deeply about creating tools that feel
+              effortless for users and dependable for the teams running them.
             </p>
             <p className="home-about-body">
-              Over the past 3+ years, I&apos;ve architected multi-tenant payroll
-              and statutory compliance engines, modeled high-volume financial
-              amortization systems, and streamlined 10,000+ SKU distribution
-              platforms. I bridge the complete product lifecycle — pairing intuitive user interfaces
-              with sub-second query performance and automated zero-downtime containerization.
+              Over the past 3+ years, I&apos;ve had the chance to build real, mission-critical systems —
+              from multi-tenant payroll and statutory tax engines to high-inventory ERPs managing
+              over 10,000 SKUs. I believe good engineering isn&apos;t about chasing every trend, but
+              choosing the right tools, writing maintainable code, and setting up automated Docker
+              pipelines so deployments are always calm and predictable.
             </p>
 
             <div
@@ -272,10 +272,10 @@ export function HomePage() {
                 <Server size={13} aria-hidden="true" /> Docker &amp; CI/CD Pipelines
               </span>
               <span>
-                <ShieldCheck size={13} aria-hidden="true" /> Multi-Tenant RLS
+                <ShieldCheck size={13} aria-hidden="true" /> Multi-Tenant Architecture
               </span>
               <span>
-                <Cpu size={13} aria-hidden="true" /> Async Worker Pools
+                <Cpu size={13} aria-hidden="true" /> High-Performance Databases
               </span>
             </div>
 
@@ -285,8 +285,8 @@ export function HomePage() {
                   <PanelsTopLeft size={19} strokeWidth={1.8} />
                 </span>
                 <div className="pillar-text">
-                  <strong>Full-Stack Applications</strong>
-                  <span>React 19 &amp; Next.js UX</span>
+                  <strong>Full-Stack Interfaces</strong>
+                  <span>Accessible, responsive UI with React &amp; Next.js</span>
                 </div>
               </div>
               <div className="about-pillar-card">
@@ -294,8 +294,8 @@ export function HomePage() {
                   <Braces size={19} strokeWidth={1.8} />
                 </span>
                 <div className="pillar-text">
-                  <strong>Distributed Backends &amp; SaaS</strong>
-                  <span>Go, PHP/Laravel, RLS</span>
+                  <strong>Robust Backends</strong>
+                  <span>Clean Go &amp; Laravel APIs with solid data design</span>
                 </div>
               </div>
               <div className="about-pillar-card">
@@ -303,15 +303,15 @@ export function HomePage() {
                   <Server size={19} strokeWidth={1.8} />
                 </span>
                 <div className="pillar-text">
-                  <strong>DevOps &amp; Cloud Systems</strong>
-                  <span>Docker &amp; 99.9% Uptime</span>
+                  <strong>DevOps &amp; Reliability</strong>
+                  <span>Docker containers, CI/CD &amp; calm deploys</span>
                 </div>
               </div>
             </div>
 
             <div className="home-about-actions">
               <TextLink href="/about">
-                Read full engineering background
+                Read full background &amp; approach
               </TextLink>
             </div>
           </div>
@@ -343,21 +343,21 @@ export function HomePage() {
       >
         <SectionHeading
           index="01"
-          label="FLAGSHIP SYSTEMS"
+          label="SELECTED PROJECTS"
           title={
             <>
-              Enterprise platforms.
+              Featured work.
               <br />
-              <span className="accent-text">Engineered for scale.</span>
+              <span className="accent-text">Built for real impact.</span>
             </>
           }
         >
           <p>
-            A curated showcase of 4 flagship systems engineered for real-world
-            operations — featuring travel catalog AI, virtual art exhibition,
-            multi-tenant HRMS, and pharmaceutical ERP distribution.
+            A selection of production systems I&apos;ve designed and shipped —
+            spanning AI travel tools, virtual art galleries, multi-tenant
+            workforce platforms, and pharmaceutical logistics ERPs.
           </p>
-          <TextLink href="/work">Explore all 0{projects.length} flagship systems</TextLink>
+          <TextLink href="/work">Explore all 0{projects.length} projects</TextLink>
         </SectionHeading>
         <div className="project-grid home-project-grid">
           {featuredProjects.map((project) => (
@@ -374,12 +374,12 @@ export function HomePage() {
           <div className="expertise-heading">
             <SectionHeading
               index="02"
-              label="CORE CAPABILITIES"
+              label="CORE EXPERTISE"
               title={
                 <>
-                  Built with intention.
+                  Built with care.
                   <br />
-                  <span className="muted-heading">From the inside out.</span>
+                  <span className="muted-heading">From interface to database.</span>
                 </>
               }
             />
@@ -414,11 +414,11 @@ export function HomePage() {
           <h2>
             Professional experience.
             <br />
-            <span className="muted-heading">Proven track record.</span>
+            <span className="muted-heading">Where I&apos;ve made an impact.</span>
           </h2>
           <p>
-            Full-time software engineering at Asipiya International and Vital
-            One, alongside concurrent enterprise ERP architecture contracts.
+            Engineering roles at Asipiya International and Vital One, paired with
+            independent enterprise architecture contracts for growing businesses.
           </p>
           <div className="experience-summary-grid">
             <div className="exp-stat-box">
@@ -444,11 +444,11 @@ export function HomePage() {
       </section>
 
       <div className="about-note container">
-        <span className="mono">A LITTLE ABOUT THE WAY I WORK</span>
+        <span className="mono">HOW I APPROACH SOFTWARE</span>
         <p>
-          Understand the workflow. Model the data.
+          Understand the actual problem.
           <br />
-          Build with care. Keep improving.
+          Build clean, test well, and ship with pride.
         </p>
         <Link
           to="/about"

@@ -113,13 +113,13 @@ export function ProjectPage() {
             </div>
             <div className="meta-quad-item">
               <span className="meta-quad-label mono">
-                <Globe size={12} aria-hidden="true" /> DOMAIN SPECIFICATION
+                <Globe size={12} aria-hidden="true" /> INDUSTRY &amp; DOMAIN
               </span>
               <p className="meta-quad-val">{project.domain}</p>
             </div>
             <div className="meta-quad-item">
               <span className="meta-quad-label mono">
-                <SlidersHorizontal size={12} aria-hidden="true" /> SYSTEM SCOPE
+                <SlidersHorizontal size={12} aria-hidden="true" /> PROJECT SCOPE
               </span>
               <p className="meta-quad-val">{project.title}</p>
             </div>
@@ -155,17 +155,17 @@ export function ProjectPage() {
 
         {/* Structured 2-Card Technical Architecture Section */}
         <div className="case-cards-duo">
-          {/* Card 1: Context & Operational Challenge */}
+          {/* Card 1: Context & Challenge */}
           <section className="case-content-card" data-reveal>
             <p className="eyebrow gold-rule">01 / CONTEXT &amp; CHALLENGE</p>
-            <h2>The operational problem &amp; constraints.</h2>
+            <h2>The challenge &amp; operational goals.</h2>
             <p className="case-card-body-text">{project.context}</p>
           </section>
 
-          {/* Card 2: Core Engineering Ownership & Deliverables */}
+          {/* Card 2: What I Built & Delivered */}
           <section className="case-content-card" data-reveal>
-            <p className="eyebrow gold-rule">02 / CORE ARCHITECTURE</p>
-            <h2>Engineering ownership &amp; deliverables.</h2>
+            <p className="eyebrow gold-rule">02 / WHAT I BUILT</p>
+            <h2>Engineering ownership &amp; key deliverables.</h2>
             <div className="case-deliverables-list">
               {project.contributions.map((item, idx) => (
                 <div key={idx} className="case-deliverable-item">
@@ -183,8 +183,8 @@ export function ProjectPage() {
         {project.workflow && project.workflow.length > 0 && (
           <section className="case-workflow-card" data-reveal>
             <div className="case-card-header">
-              <p className="eyebrow gold-rule">03 / ARCHITECTURAL PIPELINE</p>
-              <h2>Connecting client requests, state &amp; background execution.</h2>
+              <p className="eyebrow gold-rule">03 / HOW IT WORKS</p>
+              <h2>How the system functions under the hood.</h2>
             </div>
             <div className="case-pipeline-grid">
               {project.workflow.map((step, i) => (

@@ -57,12 +57,12 @@ export function AboutPage() {
             The Engineer Behind <span className="accent-text">the Architecture</span>
           </span>
         }
-        subtitle="Full-stack software engineer and DevOps architect building resilient, high-concurrency enterprise systems, multi-tenant databases, and automated cloud infrastructure."
+        subtitle="Full-stack software engineer building fast, intuitive web applications and reliable backends from Kandy, Sri Lanka."
         chips={[
           "Craftsmanship First",
-          "Full-Stack React & Go",
+          "React, Next.js & Go",
           "Docker & CI/CD",
-          "3+ Years in Production",
+          "3+ Years Shipping Code",
         ]}
       />
 
@@ -84,22 +84,29 @@ export function AboutPage() {
           <div className="about-story-copy">
             <div data-reveal>
               <p className="eyebrow">
-                <span className="accent-dot" /> FULL-STACK SOFTWARE ENGINEER &amp; DEVOPS ARCHITECT
+                <span className="accent-dot" /> FULL-STACK SOFTWARE ENGINEER &amp; SYSTEMS BUILDER
               </p>
               <h2>
-                Full-stack precision.
+                Thoughtful code.
                 <br />
-                Cloud-native reliability.
+                Built for people.
               </h2>
             </div>
             <div data-reveal>
               <p>
-                I build end-to-end applications because I care about the complete journey of software — from responsive, accessible interfaces in React 19 and Next.js to high-throughput Go and Laravel microservices, resilient relational schemas, and automated DevOps infrastructure. Based in Kandy, Sri Lanka, I spend my days architecting distributed systems, multi-tenant ledgers, and automated CI/CD container pipelines.
+                I got into software engineering because I love building things that solve actual
+                problems for real people. There is something genuinely rewarding about taking an idea
+                all the way from a blank canvas to a fast, accessible frontend, down through a reliable
+                backend, and into a production container that runs smoothly day in and day out.
               </p>
             </div>
             <div data-reveal>
               <p>
-                Whether designing an executive data dashboard, optimizing SQL queries for 35% lower latency, or setting up zero-downtime Docker deployments that cut infrastructure overhead by 40%, I focus on production stability and maintainability. I write clean, well-tested code and repeatable infrastructure that teams can build upon with confidence.
+                Over the last three years, I&apos;ve worked across the full software lifecycle — from
+                designing intuitive dashboards in React and Next.js to optimizing SQL queries in large
+                databases and setting up automated Docker deployment pipelines. I care about writing clean,
+                readable code and building systems that are a pleasure to maintain, both for myself and
+                the teammates who work alongside me.
               </p>
             </div>
             <div className="about-actions-strip" data-reveal>

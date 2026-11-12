@@ -24,18 +24,18 @@ export function ContactPage() {
       <CinematicPageHero
         bgImage={`${import.meta.env.BASE_URL}images/janith-working.webp`}
         bgPosition="center 35%"
-        badge="DIRECT COMMUNICATION"
-        metaBadge="TIMEZONE: GMT +5:30 (KANDY, LK)"
+        badge="GET IN TOUCH"
+        metaBadge="KANDY, SRI LANKA · GMT+5:30"
         title={
           <span data-hero-line>
-            Let’s Build Systems <span className="accent-text">that Perform Under Load</span>
+            Let’s Build Something <span className="accent-text">Great Together</span>
           </span>
         }
-        subtitle="Available for full-stack engineering, DevOps architecture, and enterprise SaaS consultations. Fast direct response within 24 hours."
+        subtitle="Whether you have an upcoming project, need full-stack engineering support, or just want to chat through an idea — my inbox is always open."
         chips={[
-          "Response SLA: < 24 Hours",
-          "Direct Email Available",
-          "Full-Stack & DevOps Consulting",
+          "Quick Friendly Response",
+          "Full-Time & Contract Openings",
+          "Direct Collaboration",
         ]}
       />
 

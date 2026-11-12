@@ -26,19 +26,19 @@ export function WorkPage() {
       <CinematicPageHero
         bgImage={`${import.meta.env.BASE_URL}images/janith-hero.webp`}
         bgPosition="center 30%"
-        badge="ENGINEERING DIRECTORY"
+        badge="PORTFOLIO & WORK"
         metaBadge={`0${projects.length} PRODUCTION SYSTEMS`}
         title={
           <span data-hero-line>
-            Enterprise Platforms <span className="accent-text">&amp; Production Systems</span>
+            Featured Projects <span className="accent-text">&amp; Case Studies</span>
           </span>
         }
-        subtitle="A curated showcase of distributed backends, multi-tenant SaaS architectures, statutory compliance payroll engines, and containerized cloud systems."
+        subtitle="A collection of real-world applications I've designed, built, and shipped — from multi-tenant business platforms to high-concurrency Go backends and modern web apps."
         chips={[
-          "Zero-Downtime Releases",
-          "Multi-Tenant RLS",
-          "Async Worker Pools",
-          "LKAS Statutory Compliance",
+          "Full-Stack React & Go",
+          "Multi-Tenant SaaS",
+          "Docker & CI/CD",
+          "Real-World Production",
         ]}
       />
 

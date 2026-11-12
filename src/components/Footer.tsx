@@ -8,7 +8,7 @@ export function ContactCTA() {
     <section className="contact-cta">
       <div className="container">
         <p className="eyebrow">
-          <span className="accent-dot" /> HAVE A COMPLEX SYSTEM TO BUILD?
+          <span className="accent-dot" /> HAVE A PROJECT IN MIND?
         </p>
         <Link className="cta-heading" to="/contact">
           <h2>
@@ -45,7 +45,7 @@ export function Footer() {
             </Link>
             <div className="compact-status-chip mono">
               <span className="live-pulse-dot" aria-hidden="true" />
-              <span>Available for Full-Stack &amp; DevOps</span>
+              <span>Available for New Opportunities</span>
             </div>
           </div>
 
