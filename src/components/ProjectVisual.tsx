@@ -1,178 +1,180 @@
-import {
-  Box,
-  Layers3,
-  Database,
-  ShieldCheck,
-  FileText,
-  Landmark,
-  ArrowUpRight,
-  Bike,
-  MapPin,
-  CreditCard,
-  Ticket,
-  UtensilsCrossed,
-  Bell,
-  Users,
-  Braces,
-} from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Maximize2, ShieldCheck, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { GalleryModal } from "./GalleryModal";
 
 export function ProjectVisual({
-  theme,
+  project,
   large = false,
 }: {
-  theme: Project["theme"];
+  project: Project;
   large?: boolean;
 }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const mainImgRef = useRef<HTMLImageElement | null>(null);
+
+  const gallery =
+    project.gallery && project.gallery.length > 0
+      ? project.gallery
+      : [{ src: project.coverImage, caption: project.title, tag: "Overview" }];
+
+  const currentScreenshot = gallery[activeImageIndex] || gallery[0];
+
+  useEffect(() => {
+    setIsLoaded(false);
+    if (mainImgRef.current && mainImgRef.current.complete) {
+      setIsLoaded(true);
+    }
+  }, [currentScreenshot.src]);
+
+  const mockDomain =
+    project.theme === "hr"
+      ? "https://hr.enterprise-platform.io/telemetry"
+      : project.theme === "erp"
+        ? "https://erp.pharmacore-nexus.io/workspaces"
+        : project.theme === "vps"
+          ? "https://vps.portal.io:8080/dashboard"
+          : project.theme === "travel"
+            ? "https://travelops.luxury-ai.io/catalog"
+            : project.theme === "binaare"
+              ? "https://binaareartgallery.com/curation"
+              : project.theme === "restaurant"
+                ? "https://hasthi.restaurant.au/events"
+                : "https://apex.microfinance-core.io/operations";
+
   return (
-    <div
-      className={`project-visual visual-${theme} ${large ? "visual-large" : ""}`}
-    >
-      <div className="visual-grid" />
-      <span className="visual-overline">
-        {theme === "erp"
-          ? "CONNECTED OPERATIONS"
-          : theme === "finance"
-            ? "THE LENDING LIFECYCLE"
-            : theme === "bicycle"
-              ? "MOBILITY, CONNECTED"
-              : "EXPERIENCES THAT CONNECT"}
-      </span>
-      <div className="visual-content" data-parallax>
-        {theme === "erp" && (
-          <div className="erp-diagram">
-            <div className="diagram-node node-inventory">
-              <Box />
-              <span>Inventory</span>
-              <small>Products · batches · stock</small>
+    <>
+      <div
+        className={`project-showcase-visual ${large ? "visual-large" : ""}`}
+        data-reveal
+      >
+        {/* Browser Mockup Container */}
+        <div className="showcase-browser-frame">
+          <div className="showcase-browser-header">
+            <div className="browser-traffic-lights" aria-hidden="true">
+              <span className="dot red" />
+              <span className="dot yellow" />
+              <span className="dot green" />
             </div>
-            <div className="diagram-node node-control">
-              <ShieldCheck />
-              <span>Control center</span>
-              <small>Access · settings · audit</small>
-            </div>
-            <div className="erp-center">
-              <Layers3 size={31} />
-              <span>ERP</span>
-              <small>ONE CONNECTED SYSTEM</small>
-            </div>
-            <div className="diagram-node node-finance">
-              <Landmark />
-              <span>Finance</span>
-              <small>Journals · payments · ledger</small>
-            </div>
-            <div className="diagram-node node-invoice">
-              <FileText />
-              <span>Invoicing</span>
-              <small>Sales · receipts · returns</small>
-            </div>
-            <div className="diagram-connect horizontal" />
-            <div className="diagram-connect vertical" />
-          </div>
-        )}
-        {theme === "finance" && (
-          <div className="finance-diagram">
-            <div className="finance-orbit" />
-            <div className="finance-orbit orbit-inner" />
-            <div className="finance-core">
-              <Landmark size={35} />
-              <span>
-                Lending,
-                <br />
-                connected.
-              </span>
-            </div>
-            <div className="finance-node finance-customer">
-              <Users size={19} />
-              <span>Customer records</span>
-            </div>
-            <div className="finance-node finance-loan">
-              <FileText size={19} />
-              <span>Loan workflows</span>
-            </div>
-            <div className="finance-node finance-payment">
-              <CreditCard size={19} />
-              <span>Repayments</span>
-            </div>
-            <div className="finance-node finance-report">
-              <Database size={19} />
-              <span>Ledgers & reports</span>
-            </div>
-            <span className="flow-dot dot-one" />
-            <span className="flow-dot dot-two" />
-          </div>
-        )}
-        {theme === "bicycle" && (
-          <div className="bicycle-diagram">
-            <svg viewBox="0 0 540 280" className="map-lines" aria-hidden="true">
-              <path d="M-20 60 L560 210 M80-20 L270 300 M380-20 L230 300 M-20 220 L560 80" />
-              <path
-                className="map-route"
-                d="M115 180 L215 210 L330 90 L424 125"
+
+            <div className="browser-url-pill mono">
+              <ShieldCheck
+                size={13}
+                className="text-emerald-400"
+                aria-hidden="true"
               />
-            </svg>
-            <div className="map-station station-one">
-              <MapPin size={22} />
-              <span>Station A</span>
+              <span>{mockDomain}</span>
             </div>
-            <div className="map-station station-two">
-              <MapPin size={22} />
-              <span>Station B</span>
-            </div>
-            <div className="bike-core">
-              <Bike size={42} />
-            </div>
-            <div className="map-api">
-              <Braces size={18} />
-              Station & bicycle APIs
-              <Bell size={16} />
+
+            <div className="showcase-controls">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="showcase-icon-btn"
+                  title="Visit Live Website"
+                  aria-label="Visit Live Website"
+                >
+                  <ExternalLink size={14} aria-hidden="true" />
+                </a>
+              )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="showcase-icon-btn"
+                  title="View GitHub Repository"
+                  aria-label="GitHub Repository"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                  </svg>
+                </a>
+              )}
+              <button
+                type="button"
+                className="showcase-icon-btn"
+                onClick={() => setIsModalOpen(true)}
+                title="Fullscreen Image"
+                aria-label="View Fullscreen"
+              >
+                <Maximize2 size={14} aria-hidden="true" />
+              </button>
             </div>
           </div>
-        )}
-        {theme === "restaurant" && (
-          <div className="restaurant-diagram">
-            <div className="ticket-back">
-              <UtensilsCrossed size={26} />
-              <span>
-                GOOD FOOD.
-                <br />
-                GREAT EXPERIENCES.
-              </span>
-              <small>RESTAURANT & EVENTS</small>
+
+          {/* Screenshot viewport */}
+          <div
+            className={`showcase-viewport ${isLoaded ? "is-loaded" : "is-loading"}`}
+            onClick={() => setIsModalOpen(true)}
+            title="Click to view full resolution"
+          >
+            {!isLoaded && (
+              <div className="skeleton-shimmer" aria-hidden="true" />
+            )}
+            <img
+              ref={mainImgRef}
+              src={currentScreenshot.src}
+              alt={currentScreenshot.caption}
+              className="showcase-screen-img"
+              loading="eager"
+              onLoad={() => setIsLoaded(true)}
+              onError={() => setIsLoaded(true)}
+            />
+            <div className="showcase-hover-hint mono">
+              <Maximize2 size={14} aria-hidden="true" /> Click to expand full
+              resolution (1920×1080)
             </div>
-            <div className="ticket-front">
-              <div>
-                <Ticket size={21} />
-                <ArrowUpRight size={19} />
-              </div>
-              <span>
-                From discovery
-                <br />
-                to the door.
-              </span>
-              <div className="ticket-divider" />
-              <div className="ticket-checkout">
-                <CreditCard size={18} />
-                <span>Stripe checkout</span>
-              </div>
+            <div className="showcase-badge-pill mono">
+              {currentScreenshot.tag}
             </div>
           </div>
-        )}
+
+          {/* Screenshot Thumbnails & Caption Strip */}
+          <div className="showcase-gallery-strip">
+            <p className="showcase-caption mono">
+              {activeImageIndex + 1}/{gallery.length} —{" "}
+              {currentScreenshot.caption}
+            </p>
+
+            {gallery.length > 1 && (
+              <div className="showcase-thumbs">
+                {gallery.map((item, idx) => (
+                  <button
+                    key={item.src}
+                    type="button"
+                    className={`thumb-button ${idx === activeImageIndex ? "active" : ""}`}
+                    onClick={() => setActiveImageIndex(idx)}
+                    aria-label={`View ${item.tag}`}
+                    title={item.tag}
+                  >
+                    <img src={item.src} alt="" loading="lazy" />
+                    <span className="thumb-label mono">{item.tag}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-      <span className="illustration-label">
-        <span />
-        Architecture illustration
-      </span>
-      <span className="visual-index">
-        JS /{" "}
-        {theme === "erp"
-          ? "01"
-          : theme === "finance"
-            ? "02"
-            : theme === "bicycle"
-              ? "03"
-              : "04"}
-      </span>
-    </div>
+
+      <GalleryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        screenshots={gallery}
+        projectTitle={project.title}
+        initialIndex={activeImageIndex}
+      />
+    </>
   );
 }
