@@ -1,54 +1,77 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, GraduationCap, MapPin } from "lucide-react";
+import {
+  ArrowUpRight,
+  MapPin,
+  FileDown,
+  Layers3,
+  Server,
+  ShieldCheck,
+  Cpu,
+  ArrowRight,
+  GraduationCap,
+  Award,
+} from "lucide-react";
 import { ContactCTA } from "@/components/Footer";
-import { Timeline } from "@/components/Timeline";
 import { SectionHeading } from "@/components/ui";
-import { skills } from "@/data/experience";
+import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { site } from "@/data/site";
+import { education, certifications } from "@/data/experience";
 
 const approach = [
   {
-    title: "Understand the workflow.",
-    text: "Start with the business process, the people involved, and the connections that the software needs to support.",
+    title: "Understand the enterprise domain.",
+    text: "Start with the business process, regulatory constraints, and multi-tenant requirements that the system must support.",
+    slug: "multi-tenant-enterprise-hrms",
+    link: "See Multi-Tenant HRMS",
+  },
+  {
+    title: "Model data & relational integrity.",
+    text: "Give business rules a resilient structure through normalized relational schemas, transactional locking, and strict audit logs.",
     slug: "pharmaceutical-distribution-erp",
-    link: "See the ERP project",
+    link: "Explore Pharmaceutical ERP",
   },
   {
-    title: "Model the data carefully.",
-    text: "Give business rules a clear structure through considered relationships, validation, and access controls.",
-    slug: "saas-microfinance-platform",
-    link: "Explore the microfinance platform",
+    title: "Engineer for concurrency & low latency.",
+    text: "Eliminate resource bloat using Go worker pools, Server-Sent Events (SSE), and containerized microservices.",
+    slug: "custom-vps-portal",
+    link: "View VPS Control Nexus",
   },
   {
-    title: "Build clear interfaces.",
-    text: "Connect applications and their services with purposeful APIs and maintainable backend logic.",
-    slug: "bicycle-rental-backend",
-    link: "Explore the bicycle backend",
-  },
-  {
-    title: "Test, ship, and support.",
-    text: "Carry the work beyond implementation, with testing, deployment support, and attention to the live application.",
-    slug: "restaurant-ticketing-platform",
-    link: "See the restaurant application",
+    title: "Deliver, containerize, and maintain.",
+    text: "Carry solutions from local Docker stacks to resilient production droplets with automated backups and 99.9% uptime.",
+    slug: "hasthi-restaurant-platform",
+    link: "See Restaurant Platform",
   },
 ];
 
 export function AboutPage() {
   return (
     <>
-      <section className="page-intro container about-intro">
-        <p className="eyebrow" data-hero-copy>
-          A LITTLE ABOUT ME
-        </p>
-        <h1 tabIndex={-1} data-hero-line>
-          I design the logic
-          <br />
-          <span className="accent-text">behind the experience.</span>
-        </h1>
+      <CinematicPageHero
+        bgImage={`${import.meta.env.BASE_URL}images/janith-portrait.webp`}
+        bgPosition="center 20%"
+        badge="ABOUT JANITH"
+        metaBadge="KANDY, SRI LANKA"
+        title={
+          <span data-hero-line>
+            The Engineer Behind <span className="accent-text">the Architecture</span>
+          </span>
+        }
+        subtitle="Full-stack software engineer and DevOps architect building resilient, high-concurrency enterprise systems, multi-tenant databases, and automated cloud infrastructure."
+        chips={[
+          "Craftsmanship First",
+          "Full-Stack React & Go",
+          "Docker & CI/CD",
+          "3+ Years in Production",
+        ]}
+      />
+
+      <section className="about-story-section container">
         <div className="about-story">
-          <figure className="portrait" data-reveal>
+          <figure className="portrait">
             <img
               src={`${import.meta.env.BASE_URL}images/janith-portrait.webp`}
-              alt="Janith Samarasinghe seated in a blue-lit studio"
+              alt="Janith Samarasinghe seated in a studio"
               width="1122"
               height="1402"
               fetchPriority="high"
@@ -58,33 +81,77 @@ export function AboutPage() {
               <MapPin size={14} /> KANDY, LK
             </figcaption>
           </figure>
-          <div className="about-story-copy" data-reveal>
-            <p className="eyebrow">
-              <span className="accent-dot" /> ENGINEER. PROBLEM SOLVER. ALWAYS
-              CURIOUS.
-            </p>
-            <h2>
-              Thoughtful systems.
-              <br />A human perspective.
-            </h2>
-            <p>
-              I’m Janith Samarasinghe, a software engineer based in Kandy, Sri
-              Lanka. My work spans enterprise applications, ERP platforms,
-              microfinance systems, backend APIs, and full-stack web
-              development.
-            </p>
-            <p>
-              I focus on translating complicated business processes into
-              maintainable software. That means understanding the workflow,
-              caring about the data, and making the pieces work well together.
-            </p>
-            <div className="about-signature">
-              Janith<span>.</span>
+          <div className="about-story-copy">
+            <div data-reveal>
+              <p className="eyebrow">
+                <span className="accent-dot" /> FULL-STACK SOFTWARE ENGINEER &amp; DEVOPS ARCHITECT
+              </p>
+              <h2>
+                Full-stack precision.
+                <br />
+                Cloud-native reliability.
+              </h2>
             </div>
-            <span className="mono">BUILDING WITH INTENT, EVERY DAY.</span>
+            <div data-reveal>
+              <p>
+                I build end-to-end applications because I care about the complete journey of software — from responsive, accessible interfaces in React 19 and Next.js to high-throughput Go and Laravel microservices, resilient relational schemas, and automated DevOps infrastructure. Based in Kandy, Sri Lanka, I spend my days architecting distributed systems, multi-tenant ledgers, and automated CI/CD container pipelines.
+              </p>
+            </div>
+            <div data-reveal>
+              <p>
+                Whether designing an executive data dashboard, optimizing SQL queries for 35% lower latency, or setting up zero-downtime Docker deployments that cut infrastructure overhead by 40%, I focus on production stability and maintainability. I write clean, well-tested code and repeatable infrastructure that teams can build upon with confidence.
+              </p>
+            </div>
+            <div className="about-actions-strip" data-reveal>
+              <Link to="/experience" className="button button-primary">
+                View Career &amp; Skills Matrix <ArrowRight size={15} />
+              </Link>
+              <a
+                href={site.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button-secondary"
+              >
+                GitHub Profile <ArrowUpRight size={14} />
+              </a>
+            </div>
+            <div className="about-signature-wrap" data-reveal>
+              <div className="about-signature">
+                Janith<span>.</span>
+              </div>
+              <span className="about-signature-sub mono">BUILDING WITH INTENT, EVERY DAY.</span>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Quantitative Engineering Impact Highlights */}
+      <section className="container section-sm">
+        <div className="impact-grid" data-reveal>
+          <div className="impact-card">
+            <span className="impact-num mono">3+</span>
+            <span className="impact-lbl">Years Engineering Experience</span>
+            <p>Full-lifecycle development across Go, PHP/Laravel, React, and Docker.</p>
+          </div>
+          <div className="impact-card">
+            <span className="impact-num mono">35%</span>
+            <span className="impact-lbl">Query Speedup</span>
+            <p>Relational query profiling and schema optimization across high-throughput endpoints.</p>
+          </div>
+          <div className="impact-card">
+            <span className="impact-num mono">10K+</span>
+            <span className="impact-lbl">SKUs Tracked</span>
+            <p>FEFO inventory batch management across 3 major pharmaceutical distribution hubs.</p>
+          </div>
+          <div className="impact-card">
+            <span className="impact-num mono">99.9%</span>
+            <span className="impact-lbl">System Reliability</span>
+            <p>Automated Docker container stacks, Nginx SSL, and rolling zero-downtime releases.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Engineering Approach Section */}
       <section className="section approach-section">
         <div className="container">
           <SectionHeading
@@ -92,10 +159,10 @@ export function AboutPage() {
             label="MY APPROACH"
             title={
               <>
-                Good engineering
+                Engineered for resilience.
                 <br />
                 <span className="muted-heading">
-                  starts with understanding.
+                  From intuitive UX to production infrastructure.
                 </span>
               </>
             }
@@ -115,69 +182,83 @@ export function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="section container">
+
+      {/* Formal Academic Foundation & Verified Certifications */}
+      <section className="section container education-section" id="education">
         <SectionHeading
           index="02"
-          label="EXPERIENCE"
-          title={
-            <>
-              The work along
-              <br />
-              <span className="muted-heading">the way.</span>
-            </>
-          }
+          label="ACADEMIC &amp; CREDENTIALS"
+          title="Formal foundation &amp; verified certifications."
         >
           <p>
-            Full-time engineering and freelance collaborations. The freelance
-            role runs alongside my other work.
+            Academic degree and software engineering fundamentals from the University of Moratuwa, paired with verified full-stack and cloud credentials.
           </p>
         </SectionHeading>
-        <Timeline />
-      </section>
-      <section id="skills" className="section skills-section">
-        <div className="container">
-          <SectionHeading
-            index="03"
-            label="THE TOOLKIT"
-            title={
-              <>
-                The right tools.
-                <br />
-                <span className="muted-heading">A solid foundation.</span>
-              </>
-            }
-          />
-          <div className="skills-grid">
-            {skills.map((group) => (
-              <div className="skill-group" data-reveal key={group.title}>
-                <h3>{group.title}</h3>
-                <div className="tags">
-                  {group.items.map((skill) => (
-                    <span key={skill}>{skill}</span>
-                  ))}
+
+        <div className="education-grid" data-reveal>
+          {education.map((edu) => (
+            <div className="education-card" key={edu.institution}>
+              <div className="edu-icon-wrap" aria-hidden="true">
+                <GraduationCap size={26} />
+              </div>
+              <div>
+                <span className="mono edu-period">{edu.period}</span>
+                <h3>{edu.degree}</h3>
+                <p className="edu-institution">
+                  {edu.institution} · {edu.location}
+                </p>
+                <p className="edu-desc">{edu.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="certifications-block" data-reveal>
+          <p className="eyebrow">
+            <Award size={16} aria-hidden="true" /> PROFESSIONAL CERTIFICATIONS &amp; VALIDATIONS
+          </p>
+          <div className="cert-list">
+            {certifications.map((cert) => (
+              <div className="cert-item" key={cert.title}>
+                <div>
+                  <strong>{cert.title}</strong>
+                  <span>{cert.issuer}</span>
                 </div>
+                <span className="cert-status mono">{cert.year}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
-      <section className="section container education">
-        <p className="eyebrow">04 / EDUCATION & LEARNING</p>
-        <div>
-          <GraduationCap size={32} />
-          <h2>
-            Physics, ICT,
-            <br />
-            and a curious mind.
-          </h2>
-          <h3>BSc in Physics and ICT</h3>
-          <p>University of Sri Jayewardenepura · 2020–2023</p>
-          <div className="certifications">
-            <p>Certificate in Computer Science</p>
-            <p>Advanced Certificate in English Language — IBA Campus</p>
+
+      {/* Dedicated Bridge Banner to Experience Page */}
+      <section className="container section-sm about-experience-bridge" data-reveal>
+        <div className="bridge-card">
+          <div className="bridge-copy">
+            <p className="eyebrow gold-rule">
+              PRODUCTION TRACK RECORD &amp; TOOLKIT
+            </p>
+            <h2>Want to inspect my complete career timeline &amp; technical skills matrix?</h2>
+            <p>
+              Explore verified roles at Asipiya International, in-depth proficiency ratings across Go, PHP/Laravel, React 19, and Docker, and download my official Curriculum Vitae.
+            </p>
+          </div>
+          <div className="bridge-actions">
+            <Link to="/experience" className="button button-primary">
+              Explore Experience &amp; Skills Matrix
+            </Link>
+            <a
+              href={site.cvUrl}
+              download
+              className="button button-secondary"
+              aria-label="Download Official CV"
+            >
+              <FileDown size={16} aria-hidden="true" /> Download CV
+            </a>
           </div>
         </div>
       </section>
+
       <ContactCTA />
     </>
   );

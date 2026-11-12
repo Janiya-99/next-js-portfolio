@@ -15,6 +15,7 @@
     "@fontsource-variable/inter": "latest",
     "@fontsource-variable/manrope": "latest",
     "@fontsource/ibm-plex-mono": "latest",
+    "@fontsource/poppins": "^5.3.0",
     "@gsap/react": "latest",
     "@react-three/fiber": "latest",
     "gsap": "latest",

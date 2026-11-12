@@ -3,14 +3,13 @@ import { useSyncExternalStore } from "react";
 import { categories, projects, type Category } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ContactCTA } from "@/components/Footer";
+import { CinematicPageHero } from "@/components/CinematicPageHero";
 
 const subscribe = () => () => {};
 const serverCategory = () => "";
 
 export function WorkPage() {
   const [params, setParams] = useSearchParams();
-  // Static HTML always contains all projects. Match it on hydration, then apply
-  // a shared/deep-linked query filter without replacing the server-rendered tree.
   const value = useSyncExternalStore(
     subscribe,
     () => params.get("category") || "",
@@ -21,49 +20,60 @@ export function WorkPage() {
   const visible = projects.filter(
     (project) => selected === "All" || project.category === selected,
   );
+
   return (
     <>
-      <section className="page-intro container">
-        <p className="eyebrow" data-hero-copy>
-          THE PORTFOLIO / SELECTED WORK
-        </p>
-        <h1 tabIndex={-1} data-hero-line>
-          Real problems.
-          <br />
-          <span className="accent-text">Thoughtful solutions.</span>
-        </h1>
-        <div className="page-intro-bottom" data-hero-copy>
-          <p>
-            Systems designed for real-world complexity.
-            <br />A closer look at the work and the thinking behind it.
-          </p>
-          <span className="mono">04 SELECTED PROJECTS</span>
-        </div>
-      </section>
+      <CinematicPageHero
+        bgImage={`${import.meta.env.BASE_URL}images/janith-hero.webp`}
+        bgPosition="center 30%"
+        badge="ENGINEERING DIRECTORY"
+        metaBadge={`0${projects.length} PRODUCTION SYSTEMS`}
+        title={
+          <span data-hero-line>
+            Enterprise Platforms <span className="accent-text">&amp; Production Systems</span>
+          </span>
+        }
+        subtitle="A curated showcase of distributed backends, multi-tenant SaaS architectures, statutory compliance payroll engines, and containerized cloud systems."
+        chips={[
+          "Zero-Downtime Releases",
+          "Multi-Tenant RLS",
+          "Async Worker Pools",
+          "LKAS Statutory Compliance",
+        ]}
+      />
+
       <section
         className="work-directory container"
         aria-label="Project gallery"
       >
         <div className="project-filters" aria-label="Filter projects">
-          {categories.map((category) => (
-            <button
-              key={category}
-              aria-pressed={selected === category}
-              onClick={() =>
-                setParams(category === "All" ? {} : { category }, {
-                  preventScrollReset: true,
-                })
-              }
-            >
-              {category}
-              {category === "All" && <span>04</span>}
-            </button>
-          ))}
+          {categories.map((category) => {
+            const count =
+              category === "All"
+                ? projects.length
+                : projects.filter((p) => p.category === category).length;
+            return (
+              <button
+                key={category}
+                aria-pressed={selected === category}
+                onClick={() =>
+                  setParams(category === "All" ? {} : { category }, {
+                    preventScrollReset: true,
+                  })
+                }
+              >
+                {category}
+                <span>0{count}</span>
+              </button>
+            );
+          })}
         </div>
+
         <p className="filter-status mono" role="status">
           {visible.length} {visible.length === 1 ? "PROJECT" : "PROJECTS"} /{" "}
           {selected.toUpperCase()}
         </p>
+
         <div
           className={`project-grid work-project-grid ${selected !== "All" ? "filtered-grid" : ""}`}
         >
@@ -72,6 +82,7 @@ export function WorkPage() {
           ))}
         </div>
       </section>
+
       <ContactCTA />
     </>
   );

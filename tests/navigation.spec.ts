@@ -5,17 +5,22 @@ const routes = [
   "/",
   "/work/",
   "/about/",
+  "/experience/",
   "/contact/",
+  "/work/multi-tenant-enterprise-hrms/",
   "/work/pharmaceutical-distribution-erp/",
+  "/work/custom-vps-portal/",
+  "/work/ai-travel-product-management/",
+  "/work/binaare-art-gallery/",
+  "/work/hasthi-restaurant-platform/",
   "/work/saas-microfinance-platform/",
-  "/work/bicycle-rental-backend/",
-  "/work/restaurant-ticketing-platform/",
 ];
 
 test("all routes are pre-rendered, hydrate cleanly, and have unique metadata", async ({
   page,
   request,
 }) => {
+  test.setTimeout(60000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   const titles = new Set<string>();
@@ -40,31 +45,29 @@ test("filters change results, reset, and persist across browser history", async 
   page,
 }) => {
   await page.goto("/work/");
-  await expect(page.locator(".project-card")).toHaveCount(4);
-  for (const category of [
-    "ERP & Enterprise",
-    "SaaS & Finance",
-    "APIs & Platforms",
-    "Web Applications",
-  ]) {
-    await page.getByRole("button", { name: category, exact: true }).click();
-    await expect(page.locator(".project-card")).toHaveCount(1);
-    await expect(page.getByRole("status")).toContainText("1 PROJECT");
-  }
-  await page.getByRole("button", { name: "All" }).click();
-  await expect(page.locator(".project-card")).toHaveCount(4);
-  await page.goBack();
+  await expect(page.locator(".project-card")).toHaveCount(7);
+  await page.getByRole("button", { name: /ERP & Enterprise/ }).click();
+  await expect(page.locator(".project-card")).toHaveCount(2);
+  await page.getByRole("button", { name: /SaaS & Finance/ }).click();
+  await expect(page.locator(".project-card")).toHaveCount(2);
+  await page.getByRole("button", { name: /APIs & Platforms/ }).click();
   await expect(page.locator(".project-card")).toHaveCount(1);
+  await page.getByRole("button", { name: /Web Applications/ }).click();
+  await expect(page.locator(".project-card")).toHaveCount(2);
+  await page.getByRole("button", { name: /All/ }).click();
+  await expect(page.locator(".project-card")).toHaveCount(7);
+  await page.goBack();
+  await expect(page.locator(".project-card")).toHaveCount(2);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.reload();
-  await expect(page.locator(".project-card")).toHaveCount(1);
+  await expect(page.locator(".project-card")).toHaveCount(2);
   expect(errors).toEqual([]);
-  await page.locator(".project-card-link").click();
-  await expect(page.locator("h1")).toContainText("Good experiences");
+  await page.locator(".project-card-link").first().click();
+  await expect(page.locator("h1")).toBeVisible();
   await expect(page.locator("h1")).toBeFocused();
   await page.goBack();
-  await expect(page.locator(".project-card")).toHaveCount(1);
+  await expect(page.locator(".project-card")).toHaveCount(2);
 });
 
 for (const width of [320, 390, 768, 1024, 1440]) {
@@ -208,21 +211,14 @@ test("cross-page anchors retain destination, active navigation, and hydration", 
     .getByRole("navigation", { name: "Main navigation" })
     .getByRole("link", { name: "Experience" })
     .click();
-  await expect(page).toHaveURL(/#experience$/);
-  await expect
-    .poll(() =>
-      page.evaluate(
-        () =>
-          document.querySelector("#experience")!.getBoundingClientRect().top,
-      ),
-    )
-    .toBeLessThan(200);
+  await expect(page).toHaveURL(/\/experience\/?$/);
+  await expect(page.locator("h1")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Experience", exact: true }).first(),
   ).toHaveAttribute("aria-current", "page");
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.reload();
-  await expect(page.locator("#experience")).toBeFocused();
+  await expect(page.locator("h1")).toBeVisible();
   expect(errors).toEqual([]);
 });

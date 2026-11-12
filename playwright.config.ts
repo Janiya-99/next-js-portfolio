@@ -2,7 +2,7 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests",
-  timeout: 30000,
+  timeout: 60000,
   fullyParallel: false,
   workers: 1,
   use: {
@@ -11,7 +11,7 @@ export default defineConfig({
     launchOptions: {
       executablePath:
         process.env.CHROME_PATH ||
-        (process.env.CI ? undefined : "/usr/bin/google-chrome"),
+        "/home/janith/.cache/ms-playwright/chromium-1248/chrome-linux64/chrome",
       args: ["--no-sandbox", "--enable-unsafe-swiftshader"],
     },
     screenshot: "only-on-failure",

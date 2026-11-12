@@ -13,6 +13,7 @@ const routes = [
   "/",
   "/work",
   "/about",
+  "/experience",
   "/contact",
   ...projects.map((project) => `/work/${project.slug}`),
 ];
