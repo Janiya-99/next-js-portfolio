@@ -183,32 +183,61 @@ export function MotionProvider() {
           });
 
         // Hero Entrance (Synchronized with SiteLoader so text animates visibly after boot)
+        let heroAnimated = false;
         const playHeroAnimation = () => {
+          if (heroAnimated) return;
+          const heroLines = document.querySelectorAll("[data-hero-line]");
+          const heroCopies = document.querySelectorAll("[data-hero-copy]");
+          if (heroLines.length === 0 && heroCopies.length === 0) return;
+          heroAnimated = true;
+
+          // Modern line-mask reveal with subtle blur-to-focus
           gsap.fromTo(
-            "[data-hero-line]",
-            { y: 32, opacity: 0 },
+            heroLines,
+            { yPercent: 110, opacity: 0, filter: "blur(6px)" },
             {
-              y: 0,
+              yPercent: 0,
               opacity: 1,
-              duration: 0.9,
-              stagger: 0.1,
+              filter: "blur(0px)",
+              duration: 0.85,
+              stagger: 0.08,
               ease: "power3.out",
               clearProps: "all",
             },
           );
 
+          // Sub-elements: eyebrow, small modern sub-paragraph, CTA buttons, personal strip
           gsap.fromTo(
-            "[data-hero-copy]",
-            { y: 20, opacity: 0 },
+            heroCopies,
+            { y: 18, opacity: 0, filter: "blur(4px)" },
             {
               y: 0,
               opacity: 1,
-              duration: 0.8,
-              delay: 0.2,
+              filter: "blur(0px)",
+              duration: 0.7,
+              stagger: 0.07,
+              delay: 0.1,
               ease: "power3.out",
               clearProps: "all",
             },
           );
+
+          // Right-side experience badge
+          const expBadge = document.querySelector(".hero-experience");
+          if (expBadge) {
+            gsap.fromTo(
+              expBadge,
+              { scale: 0.92, opacity: 0 },
+              {
+                scale: 1,
+                opacity: 1,
+                duration: 0.75,
+                delay: 0.2,
+                ease: "power2.out",
+                clearProps: "all",
+              },
+            );
+          }
         };
 
         const isBooted =
@@ -222,18 +251,19 @@ export function MotionProvider() {
           playHeroAnimation();
           setTimeout(() => {
             ScrollTrigger.refresh();
-          }, 150);
+          }, 100);
         };
 
         if (isBooted) {
           playHeroAnimation();
-          setTimeout(() => {
-            ScrollTrigger.refresh();
-          }, 100);
         } else {
           window.addEventListener("portfolio:booted", onBooted, {
             once: true,
           });
+          // Resilient fallback: ensure animation runs cleanly even if boot event was missed
+          setTimeout(() => {
+            if (!heroAnimated) playHeroAnimation();
+          }, 1100);
         }
 
         // Animated Numbers Counter for [data-count-to]

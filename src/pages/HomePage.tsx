@@ -110,18 +110,37 @@ export function HomePage() {
         <div className="hero-shade" />
         <div className="container cinematic-hero-inner">
           <div className="cinematic-copy">
-            <p className="eyebrow gold-rule" data-hero-copy>
+            <p className="eyebrow gold-rule hero-status-eyebrow" data-hero-copy>
+              <span className="hero-status-dot" aria-hidden="true" />
               FULL-STACK SOFTWARE ENGINEER · DEVOPS &amp; SYSTEMS ARCHITECTURE
             </p>
-            <h1 tabIndex={-1} className="hero-modern-title">
-              <span data-hero-line>Architecting</span>
-              <span data-hero-line>full-stack scale &amp;</span>
-              <span data-hero-line>
-                <em>cloud resilience.</em>
+            <h1
+              tabIndex={-1}
+              className="hero-modern-title"
+              aria-label="Architecting full-stack scale & cloud resilience."
+            >
+              <span className="hero-line-mask">
+                <span className="hero-line-inner" data-hero-line>
+                  Architecting
+                </span>
+              </span>
+              <span className="hero-line-mask">
+                <span className="hero-line-inner" data-hero-line>
+                  full-stack scale &amp;
+                </span>
+              </span>
+              <span className="hero-line-mask">
+                <span className="hero-line-inner hero-accent-gradient" data-hero-line>
+                  cloud resilience.
+                </span>
               </span>
             </h1>
             <p className="cinematic-description" data-hero-copy>
-              I engineer end-to-end applications: responsive modern interfaces in React 19 &amp; Next.js, high-concurrency Go &amp; Laravel backends, and automated DevOps container pipelines built to scale under production load. Based in Kandy, Sri Lanka.
+              I engineer end-to-end applications: responsive modern interfaces in{" "}
+              <span className="hero-inline-kw">React 19 &amp; Next.js</span>, high-concurrency{" "}
+              <span className="hero-inline-kw">Go &amp; Laravel</span> backends, and automated{" "}
+              <span className="hero-inline-kw">DevOps container pipelines</span> built to
+              scale under production load. Based in Kandy, Sri Lanka.
             </p>
             <div className="cinematic-actions" data-hero-copy>
               <ButtonLink href="/work">View Selected Work</ButtonLink>

@@ -17,11 +17,17 @@ export function SiteLoader() {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
-    if (booted) return;
+    if (booted) {
+      if (typeof window !== "undefined") {
+        (window as unknown as { __PORTFOLIO_BOOTED__?: boolean }).__PORTFOLIO_BOOTED__ = true;
+        window.dispatchEvent(new CustomEvent("portfolio:booted"));
+      }
+      return;
+    }
 
     let frameId: number;
     const start = performance.now();
-    const duration = 1700; // Cinematic, smooth pace (1.7s) to enjoy the motion details
+    const duration = 950; // Snappy, modern boot sequence (<1s) with zero exit latency
 
     const tick = (now: number) => {
       const elapsed = now - start;
@@ -33,13 +39,15 @@ export function SiteLoader() {
       if (progress < 1) {
         frameId = requestAnimationFrame(tick);
       } else {
+        // Zero-latency instant dispatch: trigger hero text animation immediately at 100%
+        if (typeof window !== "undefined") {
+          (window as unknown as { __PORTFOLIO_BOOTED__?: boolean }).__PORTFOLIO_BOOTED__ = true;
+          window.dispatchEvent(new CustomEvent("portfolio:booted"));
+        }
+        // Unmount overlay after CSS opacity fade completes
         setTimeout(() => {
-          if (typeof window !== "undefined") {
-            (window as unknown as { __PORTFOLIO_BOOTED__?: boolean }).__PORTFOLIO_BOOTED__ = true;
-            window.dispatchEvent(new CustomEvent("portfolio:booted"));
-          }
           setBooted(true);
-        }, 320);
+        }, 360);
       }
     };
 
