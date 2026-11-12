@@ -2,24 +2,29 @@ import { projects } from "@/data/projects";
 
 const base = {
   "/": {
-    title: "Janith Samarasinghe — Software Engineer",
+    title: "Janith Samarasinghe — Full Stack Software Engineer & DevOps Architect",
     description:
-      "Backend-focused software engineer in Kandy, Sri Lanka. ERP platforms, microfinance systems, APIs, and thoughtful full-stack experiences.",
+      "Full Stack Software Engineer & Systems Architect specializing in Go, PHP/Laravel, React 19, Next.js, and DevOps cloud infrastructure (Docker, CI/CD, Nginx). Enterprise systems in Sri Lanka.",
   },
   "/work": {
     title: "Selected Work | Janith Samarasinghe",
     description:
-      "Explore four software engineering projects across pharmaceutical distribution, microfinance, bicycle rental, and restaurant ticketing.",
+      "Explore 7 enterprise software projects across multi-tenant HRMS, pharmaceutical ERP, AI travel automation, custom VPS telemetry, art e-commerce, and microfinance SaaS.",
   },
   "/about": {
     title: "About | Janith Samarasinghe",
     description:
-      "Meet Janith Samarasinghe. Engineering approach, experience, technical skills, and education of a backend-focused software engineer in Sri Lanka.",
+      "Janith Samarasinghe — Full Stack Software Engineer & DevOps Architect with 3+ years experience building Go, PHP/Laravel, React, and Docker systems with 35% database speedups and 99.9% uptime.",
+  },
+  "/experience": {
+    title: "Experience & Skills | Janith Samarasinghe",
+    description:
+      "Production timeline, verified skills matrix, and official curriculum vitae download for Janith Samarasinghe — Full Stack Software Engineer & DevOps Architect.",
   },
   "/contact": {
     title: "Contact | Janith Samarasinghe",
     description:
-      "Get in touch with Janith Samarasinghe for engineering roles, product collaboration, and your next software project.",
+      "Connect with Janith Samarasinghe for full-stack engineering, DevOps pipelines, enterprise SaaS, and scalable cloud systems.",
   },
 };
 

@@ -57,17 +57,20 @@ export function RouteManager() {
     const frame = requestAnimationFrame(() => {
       window.dispatchEvent(new Event("portfolio:navigation"));
       if (location.hash) {
-        const target = document.getElementById(
-          decodeURIComponent(location.hash.slice(1)),
-        );
-        const animated = window.matchMedia(
-          "(prefers-reduced-motion: no-preference) and (pointer: fine)",
-        ).matches;
-        target?.scrollIntoView({ behavior: animated ? "smooth" : "instant" });
-        if (target) {
-          target.tabIndex = -1;
-          target.focus({ preventScroll: true });
-        }
+        const id = decodeURIComponent(location.hash.slice(1));
+        const scrollToTarget = () => {
+          const target = document.getElementById(id);
+          if (target) {
+            const animated = window.matchMedia(
+              "(prefers-reduced-motion: no-preference) and (pointer: fine)",
+            ).matches;
+            target.scrollIntoView({ behavior: animated ? "smooth" : "instant" });
+            target.tabIndex = -1;
+            target.focus({ preventScroll: true });
+          }
+        };
+        scrollToTarget();
+        setTimeout(scrollToTarget, 60);
       } else if (navigation === "POP")
         window.scrollTo(0, positions.get(location.key) || 0);
       else if (pathChanged) window.scrollTo(0, 0);

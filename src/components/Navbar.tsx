@@ -6,8 +6,8 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/experience", label: "Experience" },
   { href: "/work", label: "Projects" },
-  { href: "/#experience", label: "Experience" },
   { href: "/contact", label: "Contact" },
 ];
 const subscribe = () => () => {};
@@ -61,7 +61,10 @@ export function Navbar() {
       >
         <div className="nav-inner container">
           <Link to="/" className="brand" aria-label="Janith Samarasinghe home">
-            <span className="monogram">JS</span>
+            <span className="monogram">
+              JS<span>.</span>
+            </span>
+            <span className="brand-role mono">SYSTEMS ARCHITECT</span>
           </Link>
           <nav className="desktop-nav glass" aria-label="Main navigation">
             {links.map((link) => (
