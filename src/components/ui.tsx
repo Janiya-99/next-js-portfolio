@@ -36,7 +36,7 @@ export function SectionHeading({
   children?: ReactNode;
 }) {
   return (
-    <div className="section-heading" data-reveal>
+    <div className="section-heading">
       <div>
         <p className="eyebrow">
           <span>{index}</span> / {label}
