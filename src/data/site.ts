@@ -1,3 +1,5 @@
+import { assetUrl } from "@/lib/assets";
+
 export const site = {
   name: "Janith Samarasinghe",
   role: "Full Stack Software Engineer & Systems Builder",
@@ -7,7 +9,7 @@ export const site = {
   location: "Kandy, Sri Lanka",
   linkedin: "https://www.linkedin.com/in/janith-samarasinghe",
   github: "https://github.com/Janiya-99",
-  cvUrl: "/Janith_CV.pdf",
+  cvUrl: assetUrl("/Janith_CV.pdf"),
   bio: "Full-stack software engineer and systems builder with 3+ years of experience crafting scalable web applications, robust Go & Laravel APIs, and containerized cloud setups. Passionate about bridging clean, intuitive user interfaces with high-performance backends and stress-free deployment workflows.",
   metrics: [
     { value: "3+", label: "Years Experience" },

@@ -7,6 +7,7 @@ const routes = [
   "/about/",
   "/experience/",
   "/contact/",
+  "/work/kova-pos-enterprise-platform/",
   "/work/multi-tenant-enterprise-hrms/",
   "/work/pharmaceutical-distribution-erp/",
   "/work/custom-vps-portal/",
@@ -45,9 +46,9 @@ test("filters change results, reset, and persist across browser history", async 
   page,
 }) => {
   await page.goto("/work/");
-  await expect(page.locator(".project-card")).toHaveCount(7);
+  await expect(page.locator(".project-card")).toHaveCount(8);
   await page.getByRole("button", { name: /ERP & Enterprise/ }).click();
-  await expect(page.locator(".project-card")).toHaveCount(2);
+  await expect(page.locator(".project-card")).toHaveCount(3);
   await page.getByRole("button", { name: /SaaS & Finance/ }).click();
   await expect(page.locator(".project-card")).toHaveCount(2);
   await page.getByRole("button", { name: /APIs & Platforms/ }).click();
@@ -55,7 +56,7 @@ test("filters change results, reset, and persist across browser history", async 
   await page.getByRole("button", { name: /Web Applications/ }).click();
   await expect(page.locator(".project-card")).toHaveCount(2);
   await page.getByRole("button", { name: /All/ }).click();
-  await expect(page.locator(".project-card")).toHaveCount(7);
+  await expect(page.locator(".project-card")).toHaveCount(8);
   await page.goBack();
   await expect(page.locator(".project-card")).toHaveCount(2);
   const errors: string[] = [];

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Maximize2, ShieldCheck, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { assetUrl } from "@/lib/assets";
 import { GalleryModal } from "./GalleryModal";
 
 export function ProjectVisual({
@@ -30,19 +31,21 @@ export function ProjectVisual({
   }, [currentScreenshot.src]);
 
   const mockDomain =
-    project.theme === "hr"
-      ? "https://hr.enterprise-platform.io/telemetry"
-      : project.theme === "erp"
-        ? "https://erp.pharmacore-nexus.io/workspaces"
-        : project.theme === "vps"
-          ? "https://vps.portal.io:8080/dashboard"
-          : project.theme === "travel"
-            ? "https://travelops.luxury-ai.io/catalog"
-            : project.theme === "binaare"
-              ? "https://binaareartgallery.com/curation"
-              : project.theme === "restaurant"
-                ? "https://hasthi.restaurant.au/events"
-                : "https://apex.microfinance-core.io/operations";
+    project.theme === "pos"
+      ? "https://kova-pos.jo3.org/c/kova-mobile/login"
+      : project.theme === "hr"
+        ? "https://hr.enterprise-platform.io/telemetry"
+        : project.theme === "erp"
+          ? "https://erp.pharmacore-nexus.io/workspaces"
+          : project.theme === "vps"
+            ? "https://vps.portal.io:8080/dashboard"
+            : project.theme === "travel"
+              ? "https://travelops.luxury-ai.io/catalog"
+              : project.theme === "binaare"
+                ? "https://binaareartgallery.com/curation"
+                : project.theme === "restaurant"
+                  ? "https://hasthi.restaurant.au/events"
+                  : "https://apex.microfinance-core.io/operations";
 
   return (
     <>
@@ -124,7 +127,7 @@ export function ProjectVisual({
             )}
             <img
               ref={mainImgRef}
-              src={currentScreenshot.src}
+              src={assetUrl(currentScreenshot.src)}
               alt={currentScreenshot.caption}
               className="showcase-screen-img"
               loading="eager"
@@ -158,7 +161,7 @@ export function ProjectVisual({
                     aria-label={`View ${item.tag}`}
                     title={item.tag}
                   >
-                    <img src={item.src} alt="" loading="lazy" />
+                    <img src={assetUrl(item.src)} alt="" loading="lazy" />
                     <span className="thumb-label mono">{item.tag}</span>
                   </button>
                 ))}

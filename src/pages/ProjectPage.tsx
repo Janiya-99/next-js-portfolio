@@ -12,6 +12,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { projects } from "@/data/projects";
+import { assetUrl } from "@/lib/assets";
 import { resolveTechIcon } from "@/components/ProjectCard";
 import { ProjectVisual } from "@/components/ProjectVisual";
 import { GalleryModal } from "@/components/GalleryModal";
@@ -222,7 +223,7 @@ export function ProjectPage() {
                   aria-label={`Inspect ${item.tag}: ${item.caption}`}
                 >
                   <div className="case-screen-thumb">
-                    <img src={item.src} alt={item.caption} loading="lazy" />
+                    <img src={assetUrl(item.src)} alt={item.caption} loading="lazy" />
                     <span className="case-screen-tag mono">{item.tag}</span>
                     <span className="case-screen-zoom" aria-hidden="true">
                       <Maximize2 size={13} />

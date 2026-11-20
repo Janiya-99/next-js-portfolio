@@ -20,6 +20,7 @@ import {
   SiGooglecloud,
 } from "react-icons/si";
 import type { Project } from "@/data/projects";
+import { assetUrl } from "@/lib/assets";
 import { GalleryModal } from "./GalleryModal";
 
 export function resolveTechIcon(name: string): { Icon: IconType; color: string; label: string } {
@@ -112,19 +113,23 @@ export function ProjectCard({
 
   // Derive domain label for browser chrome mockup
   const mockDomain =
-    project.theme === "hr"
-      ? "hr.enterprise-platform.io"
-      : project.theme === "erp"
-        ? "erp.pharmacore-nexus.io"
-        : project.theme === "vps"
-          ? "vps.portal.io:8080"
-          : project.theme === "travel"
-            ? "travelops.luxury-ai.io"
-            : project.theme === "binaare"
-              ? "binaareartgallery.com"
-              : project.theme === "restaurant"
-                ? "hasthi.restaurant.au"
-                : "apex.microfinance-core.io";
+    project.theme === "pos"
+      ? "kova-pos.jo3.org"
+      : project.theme === "hr"
+        ? "hr.enterprise-platform.io"
+        : project.theme === "erp"
+          ? "erp.pharmacore-nexus.io"
+          : project.theme === "vps"
+            ? "vps.portal.io:8080"
+            : project.theme === "travel"
+              ? "travelops.luxury-ai.io"
+              : project.theme === "binaare"
+                ? "binaareartgallery.com"
+                : project.theme === "restaurant"
+                  ? "hasthi.restaurant.au"
+                  : "apex.microfinance-core.io";
+
+  const coverImageSrc = assetUrl(project.coverImage);
 
   // Compact card mode (for Home page featured projects showcase - UI/UX Pro Max 2x2 Showcase)
   if (compact) {
@@ -168,7 +173,7 @@ export function ProjectCard({
             )}
             <img
               ref={imgRef}
-              src={project.coverImage}
+              src={coverImageSrc}
               alt={project.title}
               className="compact-preview-image"
               loading="lazy"
@@ -259,7 +264,7 @@ export function ProjectCard({
             )}
             <img
               ref={imgRef}
-              src={project.coverImage}
+              src={coverImageSrc}
               alt={project.title}
               className="card-preview-image"
               loading="lazy"

@@ -28,7 +28,15 @@ export type Project = {
   category: Exclude<Category, "All">;
   summary: string;
   technologies: string[];
-  theme: "hr" | "erp" | "vps" | "binaare" | "restaurant" | "finance" | "travel";
+  theme:
+    | "pos"
+    | "hr"
+    | "erp"
+    | "vps"
+    | "binaare"
+    | "restaurant"
+    | "finance"
+    | "travel";
   domain: string;
   role: string;
   badge: string;
@@ -45,8 +53,110 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "multi-tenant-enterprise-hrms",
+    slug: "kova-pos-enterprise-platform",
     number: "01",
+    title: "KOVA POS — Multi-Tenant Offline-First POS & Accounting Platform",
+    shortTitle: "KOVA POS & ERP",
+    heading: "Offline-first counter registers, FIFO inventory & immutable double-entry accounting.",
+    category: "ERP & Enterprise",
+    summary:
+      "A cloud-native, database-per-company multi-tenant POS and accounting platform engineered with Go (Fiber v2), PostgreSQL 16, Redis 7.2, and React 19. Unifies offline-resilient edge checkouts, real-time WebSocket terminal sync, FIFO batch depletion, 6-level settings inheritance, and thermal ESC/POS hardware printing.",
+    technologies: [
+      "Go (Fiber v2)",
+      "React 19",
+      "TypeScript",
+      "PostgreSQL 16",
+      "Redis 7.2",
+      "Tailwind CSS",
+      "Docker",
+      "Nginx",
+    ],
+    theme: "pos",
+    domain: "Multi-Tenant Retail, Mobile & Multi-Industry POS / ERP",
+    role: "Lead Systems Architect & Full-Stack Engineer",
+    badge: "Live · Offline-First SaaS",
+    liveUrl: "https://kova-pos.jo3.org/c/kova-mobile/login",
+    coverImage: "/projects/kova-pos/03_kova_edge_pos_terminal.png",
+    gallery: [
+      {
+        src: "/projects/kova-pos/03_kova_edge_pos_terminal.png",
+        caption:
+          "4-pane Edge POS counter terminal with Dexie.js IndexedDB offline mirror, IMEI tracking, held bills queue, and ESC/POS cash drawer bridge",
+        tag: "Edge POS Terminal",
+      },
+      {
+        src: "/projects/kova-pos/02_kova_overview_dashboard.png",
+        caption:
+          "Multi-branch Command Center displaying live WebSocket telemetry, FIFO stock valuation, and real-time revenue velocity across branches",
+        tag: "Command Center",
+      },
+      {
+        src: "/projects/kova-pos/04_kova_fifo_inventory_grn.png",
+        caption:
+          "Warehouse Inventory & GRN intake pipeline tracking active FIFO batch cost layers, stock health, and automated low-stock replenishment",
+        tag: "FIFO & GRN",
+      },
+      {
+        src: "/projects/kova-pos/05_kova_general_ledger.png",
+        caption:
+          "Immutable double-entry General Ledger with deferred PostgreSQL trigger enforcement (SUM debits = SUM credits) and fiscal period locks",
+        tag: "General Ledger",
+      },
+      {
+        src: "/projects/kova-pos/06_kova_print_studio.png",
+        caption:
+          "Canva-style Receipt & Invoice Studio supporting A4 vector PDF, 80mm/58mm ESC/POS thermal layouts, QR stamps, and offline IndexedDB caching",
+        tag: "Print Studio",
+      },
+      {
+        src: "/projects/kova-pos/07_kova_settings_rbac.png",
+        caption:
+          "6-level Settings Inheritance & RBAC console managing white-label branding, Sri Lankan VAT/SSCL tax presets, and Redis-backed sessions",
+        tag: "Settings & RBAC",
+      },
+      {
+        src: "/projects/kova-pos/01_kova_login_portal.png",
+        caption:
+          "Tenant-isolated workspace portal (/c/kova-mobile/login) featuring EN/SI/TA localization, encrypted sessions, and 9-tier Redis Lua rate limiting",
+        tag: "Tenant Portal",
+      },
+    ],
+    metrics: [
+      { label: "Tenant Isolation", value: "DB-Per-Company" },
+      { label: "FIFO Query Speed", value: "0.099ms SQL" },
+      { label: "Accounting Math", value: "NUMERIC(19,4)" },
+      { label: "Rate Protection", value: "9-Tier Lua" },
+    ],
+    context:
+      "Retailers, mobile shops, cafes, and hardware chains cannot halt checkout lines when internet links drop, nor can they tolerate floating-point drift or cross-tenant data leaks. I architected KOVA POS using Clean / Hexagonal principles to combine physical database-per-company SaaS isolation with an offline-first IndexedDB edge register and ACID double-entry general ledger.",
+    contributions: [
+      "Architected database-per-company PostgreSQL 16 isolation (`pos_tenant_<slug>`) paired with a Master Control Plane DB (`enterprise_pos`) and lazy bounded `pgxpool` routers.",
+      "Engineered ACID POS checkouts in Go (Fiber v2 + sqlc + shopspring/decimal) locking FIFO inventory batches `FOR UPDATE` and enforcing `SUM(debit) = SUM(credit)` via deferred PostgreSQL commit triggers.",
+      "Built an offline-first Edge POS register with Dexie.js IndexedDB catalog mirroring, `UUIDv7` `sync_outbox` idempotent replay, and WebUSB / WebSerial / RawBT thermal ESC/POS printing.",
+      "Implemented zero-refresh real-time sync using isolated tenant WebSocket hubs (`/ws` & `/ws/admin`), BroadcastChannel tab echo, and React Query background invalidation.",
+      "Designed a 6-level Settings Inheritance engine (System -> Business -> Branch -> Terminal -> Category -> SKU) backed by Redis 7.2, 9-tier atomic Lua rate limiters, and Asynq Auto-PO low-stock workers.",
+    ],
+    workflow: [
+      "Edge IndexedDB Register",
+      "UUIDv7 Idempotent Sync",
+      "FIFO Batch Row Lock",
+      "Double-Entry GL Commit",
+      "WebSocket & Asynq Fanout",
+    ],
+    sections: [
+      {
+        title: "Database-Per-Company Isolation & 6-Level Settings Inheritance",
+        text: "Rather than sharing tables across competing businesses, KOVA POS provisions an isolated physical PostgreSQL 16 database per company with strictly scoped JWT validation (`TENANT` vs `PLATFORM_ADMIN`). Operational rules resolve dynamically across six priority tiers—from global defaults down to individual product SKUs—cached in Redis 7.2 with instant WebSocket invalidation.",
+      },
+      {
+        title: "Offline-First Edge Checkout, FIFO Costing & Trigger-Verified GL",
+        text: "Cashiers continue billing seamlessly during outages via a local Dexie.js mirror and `UUIDv7` outbox. On commit, a single `pgx/v5` transaction locks oldest FIFO cost layers, computes multi-tier VAT/SSCL taxes using exact `NUMERIC(19,4)` decimal math, posts balanced Cash/Revenue/Tax/COGS/Inventory journal lines verified by `trg_verify_journal_balance`, and enqueues Asynq Auto-PO checks.",
+      },
+    ],
+  },
+  {
+    slug: "multi-tenant-enterprise-hrms",
+    number: "02",
     title: "Multi-Tenant Enterprise HRMS & SaaS Platform",
     shortTitle: "Enterprise HRMS & SaaS",
     heading: "Automated payroll, workforce management & custom document design.",
@@ -151,7 +261,7 @@ export const projects: Project[] = [
   },
   {
     slug: "pharmaceutical-distribution-erp",
-    number: "02",
+    number: "03",
     title: "Pharmaceutical Distribution ERP & POS System",
     shortTitle: "PharmaCore Distribution ERP",
     heading: "Batch inventory tracking, point of sale & general ledger accounting.",
@@ -281,7 +391,7 @@ export const projects: Project[] = [
   },
   {
     slug: "saas-microfinance-platform",
-    number: "03",
+    number: "04",
     title: "Apex Core SaaS Microfinance Platform",
     shortTitle: "Microfinance Core SaaS",
     heading: "5,000+ daily loan transactions, pawning, and automated payment ledgers.",
@@ -362,7 +472,7 @@ export const projects: Project[] = [
   },
   {
     slug: "custom-vps-portal",
-    number: "04",
+    number: "05",
     title: "VPS Telemetry & Container Orchestration Nexus",
     shortTitle: "Cloud VPS Orchestration",
     heading: "Sub-second Linux socket telemetry, Docker API hooks, and terminal security.",
@@ -449,7 +559,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ai-travel-product-management",
-    number: "05",
+    number: "06",
     title: "AI Travel Product Management System",
     shortTitle: "TravelOps AI Platform",
     heading: "AI itinerary creation, smart catalog search & modern booking workflows.",
@@ -526,7 +636,7 @@ export const projects: Project[] = [
   },
   {
     slug: "binaare-art-gallery",
-    number: "06",
+    number: "07",
     title: "Binaare Virtual Art Gallery & E-Commerce Platform",
     shortTitle: "Binaare Virtual Art Gallery",
     heading: "Virtual viewing rooms, high-res canvas delivery & smooth e-commerce.",
@@ -626,7 +736,7 @@ export const projects: Project[] = [
   },
   {
     slug: "hasthi-restaurant-platform",
-    number: "07",
+    number: "08",
     title: "Hasthi Restaurant & Event Ticketing Platform",
     shortTitle: "Hasthi Multi-Outlet ERP",
     heading: "Live table booking, event ticketing, and dining administration.",

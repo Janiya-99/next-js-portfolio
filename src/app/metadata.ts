@@ -9,7 +9,7 @@ const base = {
   "/work": {
     title: "Selected Work | Janith Samarasinghe",
     description:
-      "Explore 7 enterprise software projects across multi-tenant HRMS, pharmaceutical ERP, AI travel automation, custom VPS telemetry, art e-commerce, and microfinance SaaS.",
+      "Explore 8 enterprise software projects across offline-first multi-tenant POS & ERP, HRMS, pharmaceutical ERP, AI travel automation, custom VPS telemetry, art e-commerce, and microfinance SaaS.",
   },
   "/about": {
     title: "About | Janith Samarasinghe",

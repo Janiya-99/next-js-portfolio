@@ -82,10 +82,10 @@ const technologies = [
 ];
 
 const featuredProjectSlugs = [
-  "ai-travel-product-management",
-  "binaare-art-gallery",
+  "kova-pos-enterprise-platform",
   "multi-tenant-enterprise-hrms",
   "pharmaceutical-distribution-erp",
+  "binaare-art-gallery",
 ];
 
 const featuredProjects = featuredProjectSlugs

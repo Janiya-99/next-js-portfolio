@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import type { ProjectScreenshot } from "@/data/projects";
+import { assetUrl } from "@/lib/assets";
 
 interface GalleryModalProps {
   isOpen: boolean;
@@ -80,7 +81,7 @@ export function GalleryModal({
 
         <div className="gallery-modal-viewport">
           <img
-            src={current.src}
+            src={assetUrl(current.src)}
             alt={current.caption}
             className="gallery-modal-img"
           />
@@ -123,7 +124,7 @@ export function GalleryModal({
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`View slide ${idx + 1}`}
               >
-                <img src={item.src} alt="" />
+                <img src={assetUrl(item.src)} alt="" />
               </button>
             ))}
           </div>
