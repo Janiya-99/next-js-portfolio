@@ -12,7 +12,6 @@ import {
   FileDown,
   Server,
   ShieldCheck,
-  Activity,
   Cpu,
 } from "lucide-react";
 import { Link } from "react-router-dom";

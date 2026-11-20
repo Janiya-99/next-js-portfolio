@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { ProjectScreenshot } from "@/data/projects";
 import { assetUrl } from "@/lib/assets";
 
@@ -19,10 +19,12 @@ export function GalleryModal({
   initialIndex = 0,
 }: GalleryModalProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [prevInitialIndex, setPrevInitialIndex] = useState(initialIndex);
 
-  useEffect(() => {
+  if (prevInitialIndex !== initialIndex) {
+    setPrevInitialIndex(initialIndex);
     setCurrentIndex(initialIndex);
-  }, [initialIndex]);
+  }
 
   useEffect(() => {
     if (!isOpen) return;

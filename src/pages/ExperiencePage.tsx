@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   FileDown,
   ArrowUpRight,
@@ -13,7 +12,6 @@ import {
   Cloud,
   FileCode,
   Activity,
-  CheckCircle2,
 } from "lucide-react";
 import {
   SiGo,

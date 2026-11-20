@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Check, Copy, Globe2, Mail, Phone, FileDown } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Globe2, Mail, Phone } from "lucide-react";
 import { SiGithub as Github } from "react-icons/si";
 import { FaLinkedin as Linkedin } from "react-icons/fa6";
 import { site } from "@/data/site";

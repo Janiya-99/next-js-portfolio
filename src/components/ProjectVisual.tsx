@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import {
   Maximize2,
   ShieldCheck,
@@ -19,8 +19,7 @@ export function ProjectVisual({
 }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const mainImgRef = useRef<HTMLImageElement | null>(null);
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
 
   const gallery =
     project.gallery && project.gallery.length > 0
@@ -28,13 +27,7 @@ export function ProjectVisual({
       : [{ src: project.coverImage, caption: project.title, tag: "Overview" }];
 
   const currentScreenshot = gallery[activeImageIndex] || gallery[0];
-
-  useEffect(() => {
-    setIsLoaded(false);
-    if (mainImgRef.current && mainImgRef.current.complete) {
-      setIsLoaded(true);
-    }
-  }, [currentScreenshot.src]);
+  const isLoaded = loadedSrc === currentScreenshot.src;
 
   const mockDomain =
     project.theme === "pos"
@@ -132,13 +125,12 @@ export function ProjectVisual({
               <div className="skeleton-shimmer" aria-hidden="true" />
             )}
             <img
-              ref={mainImgRef}
               src={assetUrl(currentScreenshot.src)}
               alt={currentScreenshot.caption}
               className="showcase-screen-img"
               loading="eager"
-              onLoad={() => setIsLoaded(true)}
-              onError={() => setIsLoaded(true)}
+              onLoad={() => setLoadedSrc(currentScreenshot.src)}
+              onError={() => setLoadedSrc(currentScreenshot.src)}
             />
             <div className="showcase-hover-hint mono">
               <Maximize2 size={13} aria-hidden="true" /> Expand Fullscreen
