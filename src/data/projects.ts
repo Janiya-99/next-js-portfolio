@@ -76,8 +76,14 @@ export const projects: Project[] = [
     role: "Lead Systems Architect & Full-Stack Engineer",
     badge: "Live · Offline-First SaaS",
     liveUrl: "https://kova-pos.jo3.org/c/kova-mobile/login",
-    coverImage: "/projects/kova-pos/03_kova_edge_pos_terminal.png",
+    coverImage: "/projects/kova-pos/01_kova_login_portal.png",
     gallery: [
+      {
+        src: "/projects/kova-pos/01_kova_login_portal.png",
+        caption:
+          "Tenant-isolated workspace portal (/c/kova-mobile/login) featuring EN/SI/TA localization, encrypted sessions, and 9-tier Redis Lua rate limiting",
+        tag: "Tenant Portal",
+      },
       {
         src: "/projects/kova-pos/03_kova_edge_pos_terminal.png",
         caption:
@@ -114,12 +120,6 @@ export const projects: Project[] = [
           "6-level Settings Inheritance & RBAC console managing white-label branding, Sri Lankan VAT/SSCL tax presets, and Redis-backed sessions",
         tag: "Settings & RBAC",
       },
-      {
-        src: "/projects/kova-pos/01_kova_login_portal.png",
-        caption:
-          "Tenant-isolated workspace portal (/c/kova-mobile/login) featuring EN/SI/TA localization, encrypted sessions, and 9-tier Redis Lua rate limiting",
-        tag: "Tenant Portal",
-      },
     ],
     metrics: [
       { label: "Tenant Isolation", value: "DB-Per-Company" },
@@ -130,11 +130,11 @@ export const projects: Project[] = [
     context:
       "Retailers, mobile shops, cafes, and hardware chains cannot halt checkout lines when internet links drop, nor can they tolerate floating-point drift or cross-tenant data leaks. I architected KOVA POS using Clean / Hexagonal principles to combine physical database-per-company SaaS isolation with an offline-first IndexedDB edge register and ACID double-entry general ledger.",
     contributions: [
-      "Architected database-per-company PostgreSQL 16 isolation (`pos_tenant_<slug>`) paired with a Master Control Plane DB (`enterprise_pos`) and lazy bounded `pgxpool` routers.",
-      "Engineered ACID POS checkouts in Go (Fiber v2 + sqlc + shopspring/decimal) locking FIFO inventory batches `FOR UPDATE` and enforcing `SUM(debit) = SUM(credit)` via deferred PostgreSQL commit triggers.",
-      "Built an offline-first Edge POS register with Dexie.js IndexedDB catalog mirroring, `UUIDv7` `sync_outbox` idempotent replay, and WebUSB / WebSerial / RawBT thermal ESC/POS printing.",
-      "Implemented zero-refresh real-time sync using isolated tenant WebSocket hubs (`/ws` & `/ws/admin`), BroadcastChannel tab echo, and React Query background invalidation.",
-      "Designed a 6-level Settings Inheritance engine (System -> Business -> Branch -> Terminal -> Category -> SKU) backed by Redis 7.2, 9-tier atomic Lua rate limiters, and Asynq Auto-PO low-stock workers.",
+      "Architected database-per-company PostgreSQL 16 isolation (pos_tenant_slug) paired with a Master Control Plane DB (enterprise_pos) and lazy bounded pgxpool routers.",
+      "Engineered ACID POS checkouts in Go (Fiber v2, sqlc, and shopspring/decimal) locking FIFO inventory batches FOR UPDATE and enforcing balanced debits and credits via deferred PostgreSQL commit triggers.",
+      "Built an offline-first Edge POS register with Dexie.js IndexedDB catalog mirroring, UUIDv7 sync outbox idempotent replay, and WebUSB / WebSerial / RawBT thermal ESC/POS printing.",
+      "Implemented zero-refresh real-time sync using isolated tenant WebSocket hubs (/ws and /ws/admin), BroadcastChannel tab echo, and React Query background invalidation.",
+      "Designed a 6-level Settings Inheritance engine (System to SKU) backed by Redis 7.2, 9-tier atomic Lua rate limiters, and Asynq Auto-PO low-stock workers.",
     ],
     workflow: [
       "Edge IndexedDB Register",
@@ -146,11 +146,11 @@ export const projects: Project[] = [
     sections: [
       {
         title: "Database-Per-Company Isolation & 6-Level Settings Inheritance",
-        text: "Rather than sharing tables across competing businesses, KOVA POS provisions an isolated physical PostgreSQL 16 database per company with strictly scoped JWT validation (`TENANT` vs `PLATFORM_ADMIN`). Operational rules resolve dynamically across six priority tiers—from global defaults down to individual product SKUs—cached in Redis 7.2 with instant WebSocket invalidation.",
+        text: "Rather than sharing tables across competing businesses, KOVA POS provisions an isolated physical PostgreSQL 16 database per company with strictly scoped JWT validation (TENANT vs PLATFORM_ADMIN). Operational rules resolve dynamically across six priority tiers—from global defaults down to individual product SKUs—cached in Redis 7.2 with instant WebSocket invalidation.",
       },
       {
         title: "Offline-First Edge Checkout, FIFO Costing & Trigger-Verified GL",
-        text: "Cashiers continue billing seamlessly during outages via a local Dexie.js mirror and `UUIDv7` outbox. On commit, a single `pgx/v5` transaction locks oldest FIFO cost layers, computes multi-tier VAT/SSCL taxes using exact `NUMERIC(19,4)` decimal math, posts balanced Cash/Revenue/Tax/COGS/Inventory journal lines verified by `trg_verify_journal_balance`, and enqueues Asynq Auto-PO checks.",
+        text: "Cashiers continue billing seamlessly during outages via a local Dexie.js mirror and UUIDv7 outbox. On commit, a single pgx/v5 transaction locks oldest FIFO cost layers, computes multi-tier VAT/SSCL taxes using exact NUMERIC(19,4) decimal math, posts balanced Cash, Revenue, Tax, COGS, and Inventory journal lines verified by database triggers, and enqueues Asynq Auto-PO checks.",
       },
     ],
   },

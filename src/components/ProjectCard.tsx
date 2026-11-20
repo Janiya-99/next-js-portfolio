@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type MouseEvent } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Images, ExternalLink } from "lucide-react";
 import type { IconType } from "react-icons";
@@ -14,7 +14,6 @@ import {
   SiNodedotjs,
   SiRedis,
   SiVuedotjs,
-  SiPhp,
   SiStripe,
   SiNginx,
   SiGooglecloud,
@@ -74,14 +73,15 @@ export function ProjectCard({
   project,
   className = "",
   compact = false,
+  eager = false,
 }: {
   project: Project;
   className?: string;
   compact?: boolean;
+  eager?: boolean;
 }) {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const cardRef = useRef<HTMLElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
@@ -90,28 +90,7 @@ export function ProjectCard({
     }
   }, [project.coverImage]);
 
-  const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
-    const el = cardRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rx = ((y / rect.height - 0.5) * -4).toFixed(2);
-    const ry = ((x / rect.width - 0.5) * 4).toFixed(2);
-    el.style.setProperty("--mouse-x", `${x}px`);
-    el.style.setProperty("--mouse-y", `${y}px`);
-    el.style.setProperty("--rx", `${rx}deg`);
-    el.style.setProperty("--ry", `${ry}deg`);
-  };
-
-  const handleMouseLeave = () => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.setProperty("--rx", "0deg");
-    el.style.setProperty("--ry", "0deg");
-  };
-
-  // Derive domain label for browser chrome mockup
+  // Derive domain label for compact browser chrome mockup on Home
   const mockDomain =
     project.theme === "pos"
       ? "kova-pos.jo3.org"
@@ -135,9 +114,6 @@ export function ProjectCard({
   if (compact) {
     return (
       <article
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         className={`project-card compact-showcase-card ${className}`}
         data-reveal
       >
@@ -176,7 +152,8 @@ export function ProjectCard({
               src={coverImageSrc}
               alt={project.title}
               className="compact-preview-image"
-              loading="lazy"
+              loading={eager ? "eager" : "lazy"}
+              decoding="async"
               width="1280"
               height="720"
               onLoad={() => setIsImageLoaded(true)}
@@ -229,35 +206,14 @@ export function ProjectCard({
 
   return (
     <>
-      <article
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className={`project-card modern-showcase-card ${className}`}
-        data-reveal
-      >
-        {/* Mockup browser chrome frame */}
-        <div className="card-mockup-frame">
-          <div className="card-browser-bar">
-            <div className="browser-dots" aria-hidden="true">
-              <span className="dot red" />
-              <span className="dot yellow" />
-              <span className="dot green" />
-            </div>
-            <div className="browser-address mono" title={mockDomain}>
-              <span className="lock-icon" aria-hidden="true">
-                🔒
-              </span>
-              {mockDomain}
-            </div>
-            <div className="browser-tag mono">
-              <span className="live-pulse-dot" aria-hidden="true" />
-              {project.badge}
-            </div>
-          </div>
-
-          <div
-            className={`card-image-wrap ${isImageLoaded ? "is-loaded" : "is-loading"}`}
+      <article className={`project-card modern-showcase-card ${className}`}>
+        {/* Clean Editorial Media Frame */}
+        <div className="work-card-media">
+          <Link
+            to={`/work/${project.slug}`}
+            className={`work-card-media-link ${isImageLoaded ? "is-loaded" : "is-loading"}`}
+            aria-label={`Inspect ${project.title}`}
+            tabIndex={-1}
           >
             {!isImageLoaded && (
               <div className="skeleton-shimmer" aria-hidden="true" />
@@ -267,127 +223,137 @@ export function ProjectCard({
               src={coverImageSrc}
               alt={project.title}
               className="card-preview-image"
-              loading="lazy"
-              width="1280"
-              height="720"
+              loading={eager ? "eager" : "lazy"}
+              fetchPriority={eager ? "high" : undefined}
+              decoding="async"
+              width="1440"
+              height="900"
               onLoad={() => setIsImageLoaded(true)}
               onError={() => setIsImageLoaded(true)}
             />
             <div className="card-image-overlay" />
+          </Link>
 
-            {/* Quick Actions overlay */}
-            <div className="card-image-actions">
-              {project.gallery && project.gallery.length > 0 && (
-                <button
-                  type="button"
-                  className="quick-gallery-btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsGalleryOpen(true);
-                  }}
-                  aria-label={`Open screenshot gallery for ${project.title}`}
+          <div className="work-card-media-top">
+            <span className="work-index-pill mono">
+              <span className="work-index-num">{project.number}</span>
+              <span className="work-index-sep">/</span>
+              <span>{project.category}</span>
+            </span>
+            <span className="work-status-pill mono">
+              <span className="live-pulse-dot" aria-hidden="true" />
+              {project.badge}
+            </span>
+          </div>
+
+          <div className="card-image-actions">
+            {project.gallery && project.gallery.length > 0 && (
+              <button
+                type="button"
+                className="quick-gallery-btn"
+                onClick={() => setIsGalleryOpen(true)}
+                aria-label={`Open screenshot gallery for ${project.title}`}
+              >
+                <Images size={13} aria-hidden="true" />
+                <span>{project.gallery.length} Screens</span>
+              </button>
+            )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="quick-live-btn"
+                aria-label={`Visit live site: ${project.title}`}
+              >
+                <ExternalLink size={12} aria-hidden="true" />
+                <span>Live</span>
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="quick-github-btn"
+                aria-label={`View code repository on GitHub for ${project.title}`}
+              >
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
                 >
-                  <Images size={14} aria-hidden="true" />
-                  <span>{project.gallery.length} Screens</span>
-                </button>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-live-btn"
-                  aria-label={`Visit live site: ${project.title}`}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink size={13} aria-hidden="true" />
-                  <span>Live Site</span>
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-github-btn"
-                  aria-label={`View code repository on GitHub for ${project.title}`}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>Code</span>
-                </a>
-              )}
-            </div>
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>Code</span>
+              </a>
+            )}
           </div>
         </div>
 
-        {/* Content body */}
+        {/* Clean Editorial Content Body */}
         <div className="card-body-content">
-          <div className="project-meta">
-            <span className="eyebrow">
-              {project.number} / {project.category}
-            </span>
+          <div className="work-card-head">
+            <h3>
+              <Link to={`/work/${project.slug}`} className="project-card-link">
+                {project.title}
+              </Link>
+            </h3>
             <Link
               to={`/work/${project.slug}`}
-              className="project-open"
+              className="work-card-arrow"
               aria-label={`Open case study for ${project.title}`}
             >
-              <ArrowUpRight size={18} aria-hidden="true" />
+              <ArrowUpRight size={17} aria-hidden="true" />
             </Link>
           </div>
 
-          <h3>
-            <Link to={`/work/${project.slug}`} className="project-card-link">
-              {project.title}
-            </Link>
-          </h3>
-
           <p className="project-description">{project.summary}</p>
 
-          {/* Key Metrics Strip */}
+          {/* Clean Inline Metrics Strip */}
           {project.metrics && project.metrics.length > 0 && (
             <div
-              className="project-metrics-strip"
+              className="work-card-metrics"
               aria-label="Key system metrics"
             >
               {project.metrics.slice(0, 3).map((metric) => (
-                <div className="metric-pill" key={metric.label}>
-                  <span className="metric-val mono">{metric.value}</span>
-                  <span className="metric-lbl">{metric.label}</span>
+                <div className="work-metric-item" key={metric.label}>
+                  <span className="work-metric-val mono">{metric.value}</span>
+                  <span className="work-metric-lbl">{metric.label}</span>
                 </div>
               ))}
             </div>
           )}
 
-          {/* Technologies & Footer */}
+          {/* Tech Icons & Case Study CTA */}
           <div className="project-card-bottom">
-            <div className="tags">
-              {project.technologies.slice(0, 4).map((tech) => (
-                <span key={tech}>{tech}</span>
-              ))}
+            <div className="work-card-tech-row" aria-label="Technologies used">
+              {project.technologies.slice(0, 4).map((tech) => {
+                const { Icon, color, label } = resolveTechIcon(tech);
+                return (
+                  <span key={tech} className="tech-badge-pill" title={tech}>
+                    <Icon style={{ color }} size={12} aria-hidden="true" />
+                    <span className="tech-badge-name">{label}</span>
+                  </span>
+                );
+              })}
               {project.technologies.length > 4 && (
-                <span className="more-tag">
+                <span className="tech-badge-pill more-pill mono">
                   +{project.technologies.length - 4}
                 </span>
               )}
             </div>
             <Link to={`/work/${project.slug}`} className="case-study-link">
-              Explore Architecture <ArrowUpRight size={13} aria-hidden="true" />
+              Case Study <ArrowUpRight size={14} aria-hidden="true" />
             </Link>
           </div>
         </div>
       </article>
 
       {/* Fullscreen Lightbox Modal */}
-      {project.gallery && (
+      {isGalleryOpen && project.gallery && (
         <GalleryModal
           isOpen={isGalleryOpen}
           onClose={() => setIsGalleryOpen(false)}

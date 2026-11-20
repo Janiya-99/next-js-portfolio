@@ -3,7 +3,6 @@ import { useSyncExternalStore } from "react";
 import { categories, projects, type Category } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ContactCTA } from "@/components/Footer";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
 
 const subscribe = () => () => {};
 const serverCategory = () => "";
@@ -23,62 +22,86 @@ export function WorkPage() {
 
   return (
     <>
-      <CinematicPageHero
-        bgImage={`${import.meta.env.BASE_URL}images/janith-hero.webp`}
-        bgPosition="center 30%"
-        badge="PORTFOLIO & WORK"
-        metaBadge={`0${projects.length} PRODUCTION SYSTEMS`}
-        title={
-          <span data-hero-line>
-            Featured Projects <span className="accent-text">&amp; Case Studies</span>
-          </span>
-        }
-        subtitle="A collection of real-world applications I've designed, built, and shipped — from multi-tenant business platforms to high-concurrency Go backends and modern web apps."
-        chips={[
-          "Full-Stack React & Go",
-          "Multi-Tenant SaaS",
-          "Docker & CI/CD",
-          "Real-World Production",
-        ]}
-      />
+      <section className="work-editorial-hero">
+        <div className="work-hero-glow" aria-hidden="true" />
+        <div className="container work-hero-inner">
+          <div className="work-hero-copy">
+            <p className="eyebrow gold-rule" data-hero-copy>
+              SELECTED WORK · PRODUCTION ARCHIVE
+            </p>
+            <h1 tabIndex={-1} className="work-hero-title" data-hero-line>
+              Engineered Systems{" "}
+              <span className="accent-text">&amp; Case Studies.</span>
+            </h1>
+            <p className="work-hero-subtitle" data-hero-copy>
+              Full-stack architectures designed and shipped for real business
+              operations — spanning offline-first POS platforms, multi-tenant
+              HRMS, pharmaceutical ERPs, and cloud tooling.
+            </p>
+          </div>
+
+          <div className="work-hero-stats" data-hero-copy aria-label="Portfolio summary">
+            <div className="work-hero-stat-item">
+              <strong className="mono">0{projects.length}</strong>
+              <span>Shipped Systems</span>
+            </div>
+            <div className="work-hero-stat-item">
+              <strong className="mono">0{categories.length - 1}</strong>
+              <span>Core Domains</span>
+            </div>
+            <div className="work-hero-stat-item">
+              <strong className="mono">99.9%</strong>
+              <span>Production Uptime</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section
         className="work-directory container"
         aria-label="Project gallery"
       >
-        <div className="project-filters" aria-label="Filter projects">
-          {categories.map((category) => {
-            const count =
-              category === "All"
-                ? projects.length
-                : projects.filter((p) => p.category === category).length;
-            return (
-              <button
-                key={category}
-                aria-pressed={selected === category}
-                onClick={() =>
-                  setParams(category === "All" ? {} : { category }, {
-                    preventScrollReset: true,
-                  })
-                }
-              >
-                {category}
-                <span>0{count}</span>
-              </button>
-            );
-          })}
-        </div>
+        <div className="work-toolbar">
+          <div className="project-filters" aria-label="Filter projects">
+            {categories.map((category) => {
+              const count =
+                category === "All"
+                  ? projects.length
+                  : projects.filter((p) => p.category === category).length;
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  aria-pressed={selected === category}
+                  onClick={() =>
+                    setParams(category === "All" ? {} : { category }, {
+                      preventScrollReset: true,
+                    })
+                  }
+                >
+                  {category}
+                  <span>0{count}</span>
+                </button>
+              );
+            })}
+          </div>
 
-        <p className="filter-status mono" role="status">
-          {visible.length} {visible.length === 1 ? "PROJECT" : "PROJECTS"} /{" "}
-          {selected.toUpperCase()}
-        </p>
+          <p className="filter-status mono" role="status">
+            {String(visible.length).padStart(2, "0")}{" "}
+            {visible.length === 1 ? "PROJECT" : "PROJECTS"} ·{" "}
+            {selected.toUpperCase()}
+          </p>
+        </div>
 
         <div
           className={`project-grid work-project-grid ${selected !== "All" ? "filtered-grid" : ""}`}
         >
-          {visible.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {visible.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              eager={index < 2}
+            />
           ))}
         </div>
       </section>

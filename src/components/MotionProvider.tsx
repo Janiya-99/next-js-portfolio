@@ -407,7 +407,7 @@ export function MotionProvider() {
         // Generic data-reveal elements (Bidirectional Forward & Reverse Scroll)
         gsap.utils
           .toArray<HTMLElement>(
-            "[data-reveal]:not(.compact-showcase-card):not(.section-heading):not(.experience-intro):not(.tech-heading):not(.kinetic-metric-item):not(.metric-box):not(.impact-card):not(.fact-card):not(.capability-card)",
+            "[data-reveal]:not(.compact-showcase-card):not(.modern-showcase-card):not(.section-heading):not(.experience-intro):not(.tech-heading):not(.kinetic-metric-item):not(.metric-box):not(.impact-card):not(.fact-card):not(.capability-card)",
           )
           .forEach((element) => {
             gsap.from(element, {
@@ -536,28 +536,7 @@ export function MotionProvider() {
           });
         });
 
-        // Product Loading & Staggered Showcase Card Animation
-        const showcaseCards = gsap.utils.toArray<HTMLElement>(
-          ".modern-showcase-card",
-        );
-        showcaseCards.forEach((card, i) => {
-          gsap.from(card, {
-            y: 40,
-            opacity: 0,
-            scale: 0.97,
-            duration: 0.75,
-            delay: (i % 3) * 0.08,
-            ease: "power3.out",
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 93%",
-              end: "bottom 7%",
-              toggleActions: "play none none none",
-              once: true,
-            },
-          });
-        });
+        // Work page showcase cards use pure CSS transitions for zero-lag filtering & scrolling
 
         // Home About section cards stagger
         const factCards = gsap.utils.toArray<HTMLElement>(

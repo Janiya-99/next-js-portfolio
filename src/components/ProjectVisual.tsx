@@ -1,5 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { Maximize2, ShieldCheck, ExternalLink } from "lucide-react";
+import {
+  Maximize2,
+  ShieldCheck,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import type { Project } from "@/data/projects";
 import { assetUrl } from "@/lib/assets";
 import { GalleryModal } from "./GalleryModal";
@@ -135,8 +141,7 @@ export function ProjectVisual({
               onError={() => setIsLoaded(true)}
             />
             <div className="showcase-hover-hint mono">
-              <Maximize2 size={14} aria-hidden="true" /> Click to expand full
-              resolution (1920×1080)
+              <Maximize2 size={13} aria-hidden="true" /> Expand Fullscreen
             </div>
             <div className="showcase-badge-pill mono">
               {currentScreenshot.tag}
@@ -145,10 +150,44 @@ export function ProjectVisual({
 
           {/* Screenshot Thumbnails & Caption Strip */}
           <div className="showcase-gallery-strip">
-            <p className="showcase-caption mono">
-              {activeImageIndex + 1}/{gallery.length} —{" "}
-              {currentScreenshot.caption}
-            </p>
+            <div className="showcase-strip-header">
+              <div className="showcase-caption-group">
+                <span className="showcase-counter-pill mono">
+                  {String(activeImageIndex + 1).padStart(2, "0")} /{" "}
+                  {String(gallery.length).padStart(2, "0")}
+                </span>
+                <p className="showcase-caption">{currentScreenshot.caption}</p>
+              </div>
+
+              {gallery.length > 1 && (
+                <div className="showcase-strip-nav">
+                  <button
+                    type="button"
+                    className="showcase-nav-btn"
+                    onClick={() =>
+                      setActiveImageIndex((prev) =>
+                        prev > 0 ? prev - 1 : gallery.length - 1,
+                      )
+                    }
+                    aria-label="Previous screenshot"
+                  >
+                    <ChevronLeft size={15} aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    className="showcase-nav-btn"
+                    onClick={() =>
+                      setActiveImageIndex((prev) =>
+                        prev < gallery.length - 1 ? prev + 1 : 0,
+                      )
+                    }
+                    aria-label="Next screenshot"
+                  >
+                    <ChevronRight size={15} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
+            </div>
 
             {gallery.length > 1 && (
               <div className="showcase-thumbs">
